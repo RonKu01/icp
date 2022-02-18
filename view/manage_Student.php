@@ -57,10 +57,10 @@ if(mysqli_num_rows($sql) > 0){
                         <div class="table-title">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <h2>Manage <b>Lecturers</b></h2>
+                                    <h2>Manage <b>Students</b></h2>
                                 </div>
                                 <div class="col-sm-6">
-                                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Lecturer</span></a>
+                                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Student</span></a>
                                 </div>
                             </div>
                         </div>
@@ -70,17 +70,19 @@ if(mysqli_num_rows($sql) > 0){
                                 <th>Unique_ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Position</th>
-                                <th>Major</th>
-                                <th>Research</th>
-                                <th>Interest</th>
+                                <th>Programme</th>
+                                <th>Year</th>
+                                <th>CGPA</th>
+                                <th>Phone Number</th>
+                                <th>FYP Project Title</th>
+                                <th>Supervisor Name</th>
                                 <th>password</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT * FROM `lecturer` INNER JOIN userlogin ON lecturer.unique_id = userlogin.unique_id";
+                                $sql = "SELECT * FROM `student` INNER JOIN userlogin ON student.unique_id = userlogin.unique_id";
 
                                 $result = $conn ->query($sql);
                                 if (!empty($result) && $result->num_rows > 0) {
@@ -93,13 +95,15 @@ if(mysqli_num_rows($sql) > 0){
                                         echo '<td>'.$row['unique_id'].'</td>';
                                         echo '<td>'.$row['name'].'</td>';
                                         echo '<td>'.$row['email'].'</td>';
-                                        echo '<td>'.$row['position'].'</td>';
-                                        echo '<td>'.$row['major'].'</td>';
-                                        echo '<td>'.$row['research'].'</td>';
-                                        echo '<td>'.$row['interest'].'</td>';
+                                        echo '<td>'.$row['programme'].'</td>';
+                                        echo '<td>'.$row['year'].'</td>';
+                                        echo '<td>'.$row['cgpa'].'</td>';
+                                        echo '<td>'.$row['phone_num'].'</td>';
+                                        echo '<td>'.$row['fyp_title'].'</td>';
+                                        echo '<td>'.$row['supervisor_unique_id'].'</td>';
                                         echo '<td>'.$row['password'].'</td>';
                                         echo '<td>
-                                                 <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$row['unique_id'].'`,`'.$row['name'].'`,`'.$row['email'].'`,`'.$row['position'].'`,`'.$row['major'].'`,`'.$row['research'].'`,`'.$row['interest'].'`,`'.$row['password'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                                 <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$row['unique_id'].'`,`'.$row['name'].'`,`'.$row['email'].'`,`'.$row['programme'].'`,`'.$row['year'].'`,`'.$row['cgpa'].'`,`'.$row['phone_num'].'`,`'.$row['fyp_title'].'`,`'.$row['supervisor_unique_id'].'`,`'.$row['password'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                                  <a href="#deleteEmployeeModal" onclick="return getDataForDlt(`'.$row['unique_id'].'`)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                               </td>';
                                         echo '</tr>';
@@ -120,7 +124,7 @@ if(mysqli_num_rows($sql) > 0){
                     <div class="modal-content">
                         <form class="was-validated" action="#" method="POST" enctype="multipart/form-data" autocomplete="off" novalidate>
                             <div class="modal-header">
-                                <h4 class="modal-title">Add Employee</h4>
+                                <h4 class="modal-title">Add Student</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body">
@@ -139,26 +143,38 @@ if(mysqli_num_rows($sql) > 0){
                                 <div class="p-1"><!--extra Spacing--></div>
 
                                 <div class="form-group">
-                                    <label for="position">Position</label>
-                                    <input id="position" name="position" type="text" class="form-control" required>
+                                    <label for="programme">Programme</label>
+                                    <input id="programme" name="programme" type="text" class="form-control" required>
                                 </div>
                                 <div class="p-1"><!--extra Spacing--></div>
 
                                 <div class="form-group">
-                                    <label for="major">Major</label>
-                                    <input id="major" name="major" type="text" class="form-control" required>
+                                    <label for="year">Year</label>
+                                    <input id="year" name="year" type="text" class="form-control" required>
                                 </div>
                                 <div class="p-1"><!--extra Spacing--></div>
 
                                 <div class="form-group">
-                                    <label for="research">Research</label>
-                                    <input id="research" name="research" type="text" class="form-control" required>
+                                    <label for="cgpa">CGPA</label>
+                                    <input id="cgpa" name="cgpa" type="text" class="form-control" required>
                                 </div>
                                 <div class="p-1"><!--extra Spacing--></div>
 
                                 <div class="form-group">
-                                    <label for="interest">Interest</label>
-                                    <input id="interest" name="interest" type="text" class="form-control" required>
+                                    <label for="phone_num">Phone Number</label>
+                                    <input id="phone_num" name="phone_num" type="text" class="form-control" required>
+                                </div>
+                                <div class="p-1"><!--extra Spacing--></div>
+
+                                <div class="form-group">
+                                    <label for="fyp_title">FYP Project Title</label>
+                                    <input id="fyp_title" name="fyp_title" type="text" class="form-control" required>
+                                </div>
+                                <div class="p-1"><!--extra Spacing--></div>
+
+                                <div class="form-group">
+                                    <label for="supervisor_unique_id">Supervisor Name</label>
+                                    <input id="supervisor_unique_id" name="supervisor_unique_id" type="text" class="form-control" required>
                                 </div>
                                 <div class="p-1"><!--extra Spacing--></div>
 
@@ -176,18 +192,19 @@ if(mysqli_num_rows($sql) > 0){
                     </div>
                 </div>
             </div>
+
             <!-- Edit Modal HTML -->
-            <div id="editEmployeeModal" class="modal fade">
+           <div id="editEmployeeModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form>
                             <div class="modal-header">
-                                <h4 class="modal-title">Edit Employee</h4>
+                                <h4 class="modal-title">Edit Student</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body" >
                                 <div class="error-text" id="error-text"></div>
-                                <div id="edit-lecturer-modal-body"></div>
+                                <div id="edit-Student-modal-body"></div>
                             </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -197,18 +214,19 @@ if(mysqli_num_rows($sql) > 0){
                     </div>
                 </div>
             </div>
+
             <!-- Delete Modal HTML -->
             <div id="deleteEmployeeModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form>
                             <div class="modal-header">
-                                <h4 class="modal-title">Delete Employee</h4>
+                                <h4 class="modal-title">Delete Student</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body">
                                 <div class="error-text" id="error-text"></div>
-                                <div id="delete-lecturer-modal-body"></div>
+                                <div id="delete-Student-modal-body"></div>
                             </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -222,9 +240,9 @@ if(mysqli_num_rows($sql) > 0){
     </div>
 </div>
 
-<script src="../assets/javascript/add_Lecturer.js"></script>
-<script src="../assets/javascript/update_Lecturer.js"></script>
-<script src="../assets/javascript/delete_Lecturer.js"></script>
+<script src="../assets/javascript/add_Student.js"></script>
+<script src="../assets/javascript/update_Student.js"></script>
+<script src="../assets/javascript/delete_Student.js"></script>
 
 <script src="../assets/javascript/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../assets/javascript/dashboard.js"></script>
@@ -240,8 +258,8 @@ if(mysqli_num_rows($sql) > 0){
 </script>
 
 <script>
-    function getDataForEdit(unique_id, name, email, position, major, research, interest, password){
-        return document.getElementById('edit-lecturer-modal-body').innerHTML =
+    function getDataForEdit(unique_id, name, email, programme, year, cgpa, phone_num, fyp_title, supervisor_unique_id, password){
+        return document.getElementById('edit-Student-modal-body').innerHTML =
         '<div class="form-group">' +
             '<label for="unique_id">UniqueID</label> ' +
             '<input id="unique_id" name="unique_id" type="text" class="form-control" value="'+ unique_id +'" readonly> ' +
@@ -261,26 +279,38 @@ if(mysqli_num_rows($sql) > 0){
         '<div class="p-1"><!--extra Spacing--></div>' +
 
         '<div class="form-group">' +
-        '<label for="position">Position</label> ' +
-        '<input id="position" name="position" type="text" class="form-control" value="'+ position +'" required> ' +
+        '<label for="programme">Programme</label> ' +
+        '<input id="programme" name="programme" type="text" class="form-control" value="'+ programme +'" required> ' +
         '</div>' +
         '<div class="p-1"><!--extra Spacing--></div>' +
 
         '<div class="form-group">' +
-        '<label for="major">Major</label> ' +
-        '<input id="major" name="major" type="text" class="form-control" value="'+ major +'" required> ' +
+        '<label for="year">Year</label> ' +
+        '<input id="year" name="year" type="text" class="form-control" value="'+ year +'" required> ' +
         '</div>' +
         '<div class="p-1"><!--extra Spacing--></div>' +
 
         '<div class="form-group">' +
-        '<label for="research">Research</label> ' +
-        '<input id="research" name="research" type="text" class="form-control" value="'+ research +'" required> ' +
+        '<label for="cgpa">CGPA</label> ' +
+        '<input id="cgpa" name="cgpa" type="text" class="form-control" value="'+ cgpa +'" required> ' +
         '</div>' +
         '<div class="p-1"><!--extra Spacing--></div>' +
 
         '<div class="form-group">' +
-        '<label for="interest">Interest</label> ' +
-        '<input id="interest" name="interest" type="text" class="form-control" value="'+ interest +'" required> ' +
+        '<label for="phone_num">Phone Number</label> ' +
+        '<input id="phone_num" name="phone_num" type="text" class="form-control" value="'+ phone_num +'" required> ' +
+        '</div>' +
+        '<div class="p-1"><!--extra Spacing--></div>' +
+
+        '<div class="form-group">' +
+        '<label for="fyp_title">FYP Project Title</label> ' +
+        '<input id="fyp_title" name="fyp_title" type="text" class="form-control" value="'+ fyp_title +'" required> ' +
+        '</div>' +
+        '<div class="p-1"><!--extra Spacing--></div>' +
+
+        '<div class="form-group">' +
+        '<label for="supervisor_unique_id">Supervisor Name</label> ' +
+        '<input id="supervisor_unique_id" name="supervisor_unique_id" type="text" class="form-control" value="'+ supervisor_unique_id +'" required> ' +
         '</div>' +
         '<div class="p-1"><!--extra Spacing--></div>' +
 
@@ -293,7 +323,7 @@ if(mysqli_num_rows($sql) > 0){
     }
 
     function getDataForDlt(unique_id){
-        return document.getElementById('delete-lecturer-modal-body').innerHTML =
+        return document.getElementById('delete-Student-modal-body').innerHTML =
             '<div class="form-group">' +
             '<input id="unique_id" name="unique_id" type="hidden" class="form-control" value="'+ unique_id +'" readonly> ' +
             '</div>' +

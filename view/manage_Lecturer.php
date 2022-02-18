@@ -120,7 +120,7 @@ if(mysqli_num_rows($sql) > 0){
                     <div class="modal-content">
                         <form class="was-validated" action="#" method="POST" enctype="multipart/form-data" autocomplete="off" novalidate>
                             <div class="modal-header">
-                                <h4 class="modal-title">Add Employee</h4>
+                                <h4 class="modal-title">Add Lecturer</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body">
@@ -182,7 +182,7 @@ if(mysqli_num_rows($sql) > 0){
                     <div class="modal-content">
                         <form>
                             <div class="modal-header">
-                                <h4 class="modal-title">Edit Employee</h4>
+                                <h4 class="modal-title">Edit Lecturer</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body" >
@@ -203,7 +203,7 @@ if(mysqli_num_rows($sql) > 0){
                     <div class="modal-content">
                         <form>
                             <div class="modal-header">
-                                <h4 class="modal-title">Delete Employee</h4>
+                                <h4 class="modal-title">Delete Lecturer</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body">
