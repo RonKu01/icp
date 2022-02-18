@@ -1,0 +1,54 @@
+<?php
+    session_start();
+    include_once "config.php";
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $programme = mysqli_real_escape_string($conn, $_POST['programme']);
+    $year = mysqli_real_escape_string($conn, $_POST['year']);
+    $cgpa = mysqli_real_escape_string($conn, $_POST['cgpa']);
+    $phone_num = mysqli_real_escape_string($conn, $_POST['phone_num']);
+    $fyp_title = mysqli_real_escape_string($conn, $_POST['fyp_title']);
+    $supervisor_unique_id = mysqli_real_escape_string($conn, $_POST['supervisor_unique_id']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+
+    if(!empty($name) && !empty($email) && !empty($programme) && !empty($year)&& !empty($cgpa) && !empty($phone_num)&& !empty($fyp_title) && !empty($supervisor_unique_id) && !empty($password)){
+        if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $sql = mysqli_query($conn, "SELECT * FROM student WHERE email = '{$email}'");
+            if(mysqli_num_rows($sql) > 0){
+                echo "$email - This email already exist!";
+            }else{
+
+                $ran_id = rand(time(), 10000);
+                $roles = "Student";
+                $encrypt_pass = md5($password);
+                $login_id = 'KDU'. $name;
+
+                $insert_query = mysqli_query($conn, "INSERT INTO userlogin (login_id, password, roles, unique_id)
+                VALUES ('{$login_id}', '{$encrypt_pass}', '{$roles}', '{$ran_id}')");
+
+                if($insert_query){
+                  $insert_query2 = mysqli_query($conn, "INSERT INTO student (unique_id, name, email, programme, year, cgpa, phone_num, fyp_title, supervisor_unique_id)
+                  VALUES ('{$ran_id}', '{$name}', '{$email}', '{$programme}', '{$year}', '{$cgpa}', '{$phone_num}', '{$fyp_title}', '{$supervisor_unique_id}')");
+
+                  if($insert_query2){
+                      $sql = mysqli_query($conn, "SELECT * FROM student WHERE unique_id = '{$ran_id}'");
+
+                      if(mysqli_num_rows($sql) > 0){
+                          $result = mysqli_fetch_assoc($sql);
+                          $_SESSION['unique_id'] = $result['unique_id'];
+                          echo "success";
+                      }else{
+                          echo "This unique ID is not Exist!";
+                      }
+                  }
+                }else{
+                    echo "Something went wrong. Please try again!";
+                }
+            }
+        }else{
+            echo "$email is not a valid email!";
+        }
+    }else{
+        echo "All input fields are required!";
+    }
+?>
