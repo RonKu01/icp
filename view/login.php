@@ -9,6 +9,7 @@ if(isset($_SESSION['unique_id'])){
 <link href="../assets/css/login.css" rel="stylesheet">
 
 <body class="text-center">
+    <h1>DeLETE THIS</h1>
     <main class="form-signin">
         <h1 class="h2 mb-3 fw-bold">ICP Assignment</h1>
         <form class="was-validated" action="#" method="POST" enctype="multipart/form-data" autocomplete="off" novalidate>
