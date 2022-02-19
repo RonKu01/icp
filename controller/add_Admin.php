@@ -24,7 +24,6 @@
 
                 if(mysqli_num_rows($sql) > 0){
                     $result = mysqli_fetch_assoc($sql);
-                    $_SESSION['unique_id'] = $result['unique_id'];
                     echo "success";
                 }else{
                     echo "This unique ID is not Exist!";

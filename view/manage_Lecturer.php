@@ -283,7 +283,6 @@ if(!isset($_SESSION['unique_id'])){
             '<input id="password" name="password" type="password" class="form-control" value="'+ password +'" required> ' +
             '</div>' +
             '<div class="p-1"><!--extra Spacing--></div>' ;
-
         }
 
         function getDataForDlt(unique_id){
