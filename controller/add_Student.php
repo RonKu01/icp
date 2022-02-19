@@ -21,7 +21,7 @@
                 $ran_id = rand(time(), 10000);
                 $roles = "Student";
                 $encrypt_pass = md5($password);
-                $login_id = 'KDU'. $name;
+                $login_id = 'ST_'. $name;
 
                 $insert_query = mysqli_query($conn, "INSERT INTO userlogin (login_id, password, roles, unique_id)
                 VALUES ('{$login_id}', '{$encrypt_pass}', '{$roles}', '{$ran_id}')");

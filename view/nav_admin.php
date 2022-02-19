@@ -25,12 +25,6 @@
                     Chat Room
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="forum.php">
-                    <span data-feather="file"></span>
-                    Forum
-                </a>
-            </li>
         </ul>
     </div>
 </nav>
