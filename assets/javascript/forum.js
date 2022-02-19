@@ -4,7 +4,7 @@ http_request = new XMLHttpRequest();
 
 function LoadData(){
     $.ajax({
-        url: '../../controller/forum.php',
+        url: '../controller/forum.php',
         type: "POST",
         dataType: 'json',
         success: function(data) {
@@ -52,7 +52,7 @@ $( document ).ready(function() {
 
         if (category != "" && post != "") {
             $.ajax({
-                url: "../../controller/insert-forum.php",
+                url: "../controller/insert-forum.php",
                 type: "POST",
                 data: {
                     id: id,
@@ -87,7 +87,7 @@ $( document ).ready(function() {
 
         if(post !== ""){
             $.ajax({
-                url: "../../controller/insert-forum.php",
+                url: "../controller/insert-forum.php",
                 type: "POST",
                 data: {
                     id: id,
