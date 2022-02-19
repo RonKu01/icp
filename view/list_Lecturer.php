@@ -32,7 +32,7 @@ if(!isset($_SESSION['unique_id'])){
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <label class="form-control form-control-dark w-100" style="text-align: center">STUDENT</label>
+    <label class="form-control form-control-dark w-100" style="text-align: center">ICP ASSIGNMENT</label>
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
             <a class="nav-link px-3" href="../controller/logout.php?logout_id=<?php echo $_SESSION['unique_id']; ?> ">Sign out</a>
@@ -42,10 +42,7 @@ if(!isset($_SESSION['unique_id'])){
 
 <div class="container-fluid" >
     <div class="row">
-        <?php
-            require_once "nav_student.php";
-        ?>
-
+        <?php require_once "nav_lecturer.php" ?>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
             <div class="container-xl">
@@ -101,13 +98,13 @@ if(!isset($_SESSION['unique_id'])){
                 </div>
             </div>
         </main>
-
-
     </div>
 </div>
 
 <script src="../assets/javascript/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../assets/javascript/dashboard.js"></script>
+
+
 
 </body>
 

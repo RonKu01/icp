@@ -8,6 +8,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="list_Lecturer.php">
+                    <span data-feather="file"></span>
+                    Lecturer List
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="chat_room.php">
                     <span data-feather="file"></span>
                     Chat Room
