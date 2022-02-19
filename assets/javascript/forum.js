@@ -4,7 +4,7 @@ http_request = new XMLHttpRequest();
 
 function LoadData(){
     $.ajax({
-        url: '../../controller/forum.php',
+        url: '../controller/forum.php',
         type: "POST",
         dataType: 'json',
         success: function(data) {
