@@ -52,7 +52,7 @@ $( document ).ready(function() {
 
         if (category != "" && post != "") {
             $.ajax({
-                url: "../../controller/insert-forum.php",
+                url: "../controller/insert-forum.php",
                 type: "POST",
                 data: {
                     id: id,
@@ -87,7 +87,7 @@ $( document ).ready(function() {
 
         if(post !== ""){
             $.ajax({
-                url: "../../controller/insert-forum.php",
+                url: "../controller/insert-forum.php",
                 type: "POST",
                 data: {
                     id: id,
