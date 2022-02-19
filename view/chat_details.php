@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "../controller/config.php";
+
 if(!isset($_SESSION['unique_id'])){
     header("location: login.php");
 }
@@ -96,7 +97,7 @@ if(mysqli_num_rows($sql) > 0){
     <label class="form-control form-control-dark w-100" style="text-align: center">ICP ASSIGNMENT</label>
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="../controller/logout.php?logout_id=<?php echo $row['unique_id']; ?> ">Sign out</a>
+            <a class="nav-link px-3" href="../controller/logout.php?logout_id=<?php echo $_SESSION['unique_id']; ?> ">Sign out</a>
         </div>
     </div>
 </header>
