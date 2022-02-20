@@ -104,9 +104,7 @@ if(!isset($_SESSION['unique_id'])){
                             </form>
                         </div>
                     </div>
-
                     <div class="p-2"><!--extra Spacing--></div>
-
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <h4>Recent Discussion</h4>
@@ -117,10 +115,8 @@ if(!isset($_SESSION['unique_id'])){
                     </div>
                 </div>
             </main>
-
         </div>
     </div>
-
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="../assets/javascript/forum.js"></script>
