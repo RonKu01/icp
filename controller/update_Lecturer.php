@@ -24,7 +24,7 @@
             }
             $update_query2 = mysqli_query($conn, "UPDATE `lecturer` SET `email`='".$email."',`position`='".$position."',`major`='".$major."',`research`='".$research."',`interest`='".$interest."' WHERE `unique_id`='".$unique_id."'");
 
-            echo "success";
+            echo "Update Successfully";
 
         }else{
             echo "This unique ID is not Exist!";

@@ -7,7 +7,18 @@ if(!isset($_SESSION['unique_id'])){
 ?>
 
 <?php include_once "header.php"; ?>
-
+<style>
+    #msg_banner{
+        color: black;
+        padding: 8px 10px;
+        text-align: center;
+        border-radius: 5px;
+        background: #f8d7da;
+        border: 1px solid #f5c6cb;
+        margin-bottom: 10px;
+        display: none;
+    }
+</style>
 <body>
 
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -40,7 +51,6 @@ if(!isset($_SESSION['unique_id'])){
         }
         ?>
 
-        <!-- Edit Modal Table -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
         <?php
@@ -50,8 +60,9 @@ if(!isset($_SESSION['unique_id'])){
             }
         ?>
             <div class="container-xl">
-                <div class="py-3">
+                <div class="py-5 px-3">
                     <div class="col-md-7 col-lg-4">
+                    <div id="msg_banner"></div>
                     <h4 class="mb-3">Lecturer Profile</h4>
                     <form class="needs-validation" novalidate>
                         <div class="row g-2">
