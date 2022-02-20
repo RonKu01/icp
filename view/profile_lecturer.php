@@ -51,7 +51,7 @@ if(!isset($_SESSION['unique_id'])){
         ?>
             <div class="container-xl">
                 <div class="py-3">
-                    <div class="col-md-7 col-lg-8">
+                    <div class="col-md-7 col-lg-4">
                     <h4 class="mb-3">Lecturer Profile</h4>
                     <form class="needs-validation" novalidate>
                         <div class="row g-2">

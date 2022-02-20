@@ -132,6 +132,7 @@ if(!isset($_SESSION['unique_id'])){
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body">
+                                <input id="supervisor_unique_id" name="supervisor_unique_id" type="hidden" value="none">
                                 <div class="error-text"></div>
 
                                 <div class="form-group">
@@ -173,12 +174,6 @@ if(!isset($_SESSION['unique_id'])){
                                 <div class="form-group">
                                     <label for="fyp_title">FYP Project Title</label>
                                     <input id="fyp_title" name="fyp_title" type="text" class="form-control" required>
-                                </div>
-                                <div class="p-1"><!--extra Spacing--></div>
-
-                                <div class="form-group">
-                                    <label for="supervisor_unique_id">Supervisor Name</label>
-                                    <input id="supervisor_unique_id" name="supervisor_unique_id" type="text" class="form-control" required>
                                 </div>
                                 <div class="p-1"><!--extra Spacing--></div>
 

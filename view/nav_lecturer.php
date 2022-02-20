@@ -20,6 +20,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="fyp_progression.php">
+                    <span data-feather="file"></span>
+                    FYP Progression Table
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="chat_room.php">
                     <span data-feather="file"></span>
                     Chat Room
