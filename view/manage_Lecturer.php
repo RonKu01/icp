@@ -9,8 +9,6 @@ if(!isset($_SESSION['unique_id'])){
 
 <?php include_once "header.php"; ?>
 
-<!-- DataTable CSS -->
-<link href="../assets/css/dataTable.css" rel="stylesheet">
 
 <style>
     div.error-text{
@@ -45,7 +43,7 @@ if(!isset($_SESSION['unique_id'])){
             <?php require_once "nav_admin.php" ?>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-                <div class="container-xl">
+                <div class="container-xl ">
                     <div class="table-responsive">
                         <div class="table-wrapper">
                             <div class="table-title">
@@ -220,16 +218,23 @@ if(!isset($_SESSION['unique_id'])){
     <script src="../assets/javascript/update_Lecturer.js"></script>
     <script src="../assets/javascript/delete_Lecturer.js"></script>
 
-    <script src="../assets/javascript/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../assets/javascript/dashboard.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="../assets/javascript/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../assets/javascript/dashboard.js"></script>
+
     <script>
         $(document).ready(function(){
             // Activate tooltip
             $('[data-toggle="tooltip"]').tooltip();
+
+            // NavBar Active
+            $('a.active').removeClass('active');
+            var url = window.location.pathname;
+            var filename = url.substring(url.lastIndexOf('/')+1);
+            $('a[href$="' + filename + '"]').addClass('active');
         });
     </script>
 
@@ -298,6 +303,15 @@ if(!isset($_SESSION['unique_id'])){
         }
     </script>
 
+    <script>
+        $(document).ready(function(){
+            // NavBar Active
+            $('a.active').removeClass('active');
+            var url = window.location.pathname;
+            var filename = url.substring(url.lastIndexOf('/')+1);
+            $('a[href$="' + filename + '"]').addClass('active');
+        });
+    </script>
 </body>
 
 </html>

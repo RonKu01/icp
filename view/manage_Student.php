@@ -9,9 +9,6 @@ if(!isset($_SESSION['unique_id'])){
 
 <?php include_once "header.php"; ?>
 
-<!-- DataTable CSS -->
-<link href="../assets/css/dataTable.css" rel="stylesheet">
-
 <style>
     div.error-text{
         color: #721c24;
@@ -252,6 +249,7 @@ if(!isset($_SESSION['unique_id'])){
 </script>
 
 <script>
+
     function getDataForEdit(unique_id, name, email, programme, year, cgpa, phone_num, fyp_title, supervisor_unique_id, password){
         return document.getElementById('edit-Student-modal-body').innerHTML =
         '<div class="form-group">' +
@@ -328,6 +326,16 @@ if(!isset($_SESSION['unique_id'])){
             '</p>'
     }
 
+</script>
+
+<script>
+    $(document).ready(function(){
+        // NavBar Active
+        $('a.active').removeClass('active');
+        var url = window.location.pathname;
+        var filename = url.substring(url.lastIndexOf('/')+1);
+        $('a[href$="' + filename + '"]').addClass('active');
+    });
 </script>
 
 </body>
