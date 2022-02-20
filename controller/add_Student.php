@@ -30,7 +30,10 @@
                   $insert_query2 = mysqli_query($conn, "INSERT INTO student (unique_id, name, email, programme, year, cgpa, phone_num, fyp_title, supervisor_unique_id)
                   VALUES ('{$ran_id}', '{$name}', '{$email}', '{$programme}', '{$year}', '{$cgpa}', '{$phone_num}', '{$fyp_title}', '{$supervisor_unique_id}')");
 
-                  if($insert_query2){
+                  $insert_query3 = mysqli_query($conn,"INSERT INTO progress (student_unique_id, lecturer_unique_id, progress_stage, proposal_due, final_due)
+                  VALUES ('{$ran_id}', '0', 'not_set', 'NULL', 'NULL')");
+
+                  if($insert_query3){
                       $sql = mysqli_query($conn, "SELECT * FROM student WHERE unique_id = '{$ran_id}'");
 
                       if(mysqli_num_rows($sql) > 0){
