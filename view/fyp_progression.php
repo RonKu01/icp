@@ -67,33 +67,52 @@ if(!isset($_SESSION['unique_id'])){
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php
-                                $sql = "SELECT * FROM `progress` INNER JOIN student ON progress.student_unique_id = student.unique_id";
 
-                                $result = $conn ->query($sql);
-                                if (!empty($result) && $result->num_rows > 0) {
-                                    for ($i = 0; $i < mysqli_num_rows($result); $i++){
-                                        $row  = mysqli_fetch_assoc($result);
 
-                                        $unique_id = $row['unique_id'];
 
-                                        echo '<tr>';
-                                        echo '<td>'.$row['name'].'</td>';
-                                        if($row['lecturer_unique_id']==0){
-                                            echo '<td>not_set</td>';
-                                        }else{
-                                            echo '<td>'.$row['lecturer_unique_id'].'</td>';
-                                        }
-                                        echo '<td>'.$row['progress_stage'].'</td>';
-                                        echo '<td>'.$row['proposal_due'].'</td>';
-                                        echo '<td>'.$row['final_due'].'</td>';
-                                        echo '<td>
-                                                 <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$row['student_unique_id'].'`,`'.$row['lecturer_unique_id'].'`,`'.$row['progress_stage'].'`,`'.$row['proposal_due'].'`,`'.$row['final_due'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                               </td>';
-                                        echo '</tr>';
+                                    <?php
+                                    $sql = "SELECT * FROM `progress` INNER JOIN student ON progress.student_unique_id = student.unique_id";
+
+                                    $lecturer_unique_id_list = array();
+                                    $lecturer_name_list = array();
+
+                                    $sql2 = "SELECT * FROM `lecturer`";
+                                    $result2 = $conn -> query($sql2);
+                                    for ($i = 0; $i < mysqli_num_rows($result2); $i++) {
+                                        $row2 = mysqli_fetch_assoc($result2);
+                                        $lecturer_unique_id_list[$i] = $row2['unique_id'];
+                                        $lecturer_name_list[$i] = $row2['name'];
                                     }
-                                }
-                                mysqli_free_result($result);
+
+                                    $encoded_lecturer_unique_id = json_encode($lecturer_unique_id_list);
+                                    $encoded_lecturer_name = json_encode($lecturer_name_list);
+
+                                    $lecturer_list_length = count($lecturer_unique_id_list);
+
+                                    $result = $conn ->query($sql);
+                                    if (!empty($result) && $result->num_rows > 0) {
+                                        for ($i = 0; $i < mysqli_num_rows($result); $i++){
+                                            $row  = mysqli_fetch_assoc($result);
+
+                                            $unique_id = $row['unique_id'];
+
+                                            echo '<tr>';
+                                            echo '<td>'.$row['name'].'</td>';
+                                            if($row['lecturer_unique_id']==0){
+                                                echo '<td>not_set</td>';
+                                            }else{
+                                                echo '<td>'.$row['lecturer_unique_id'].'</td>';
+                                            }
+                                            echo '<td>'.$row['progress_stage'].'</td>';
+                                            echo '<td>'.$row['proposal_due'].'</td>';
+                                            echo '<td>'.$row['final_due'].'</td>';
+                                            echo '<td>
+                                                     <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$row['student_unique_id'].'`,`'.$row['name'].'`,`'.$row['lecturer_unique_id'].'`,`'.$row['progress_stage'].'`,`'.$row['proposal_due'].'`,`'.$row['final_due'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                                   </td>';
+                                            echo '</tr>';
+                                        }
+                                    }
+                                    mysqli_free_result($result);
                                 ?>
                                 </tbody>
                             </table>
@@ -112,6 +131,7 @@ if(!isset($_SESSION['unique_id'])){
                                 </div>
                                 <div class="modal-body">
                                     <div class="error-text" id="error-text"></div>
+
                                     <div id="assign-supervisor-modal-body"></div>
                                 </div>
                                 <div class="modal-footer">
@@ -142,36 +162,34 @@ if(!isset($_SESSION['unique_id'])){
         $('a[href$="' + filename + '"]').addClass('active');
     });
 </script>
-    <?php
-        $sql2 = "SELECT * FROM lecturer";
-
-        $result = $conn ->query($sql2);
-            if (!empty($result) && $result->num_rows > 0) {
-                for ($i = 0; $i < mysqli_num_rows($result); $i++){
-                    $row2  = mysqli_fetch_assoc($result);
-
-                }
-            }
-            mysqli_close($conn);
-            ?>
-
 
     <script>
-        function getDataForEdit(student_unique_id, lecturer_unique_id, progress_stage, proposal_due, final_due){
+        function getDataForEdit(student_unique_id, student_name, lecturer_unique_id, progress_stage, proposal_due, final_due){
+
+            var lec_unique_id = <?php echo $encoded_lecturer_unique_id?>;
+            var lec_name = <?php echo $encoded_lecturer_name?>;
+
+            let y = '';
+
+            for(let i = 0; i < lec_unique_id.length; i++){
+                var z = '<option value="' + lec_unique_id[i] + '">' + lec_name[i] +'</option> +';
+                y = y.concat(z);
+            }
+
             return document.getElementById('assign-supervisor-modal-body').innerHTML =
+                '<input id="student_unique_id" name="student_unique_id" type="hidden" value="'+ student_unique_id +'"> ' +
                 '<div class="form-group">' +
                 '<label for="name">Name</label> ' +
-                '<input id="name" name="name" type="text" class="form-control" value="'+ student_unique_id +'" readonly> ' +
+                '<input id="name" name="name" type="text" class="form-control" value="'+ student_name +'" readonly> ' +
                 '</div>' +
                 '<div class="p-1"><!--extra Spacing--></div>' +
 
                 '<div class="form-group">' +
                 '<label for="supervisor_name">Supervisor Name</label> ' +
-                '<select class="form-select form-select-sm" aria-label=".form-select-sm example">' +
-                    '<option selected>Select Supervisor</option>' +
-                    '<option value = "<?php $row2['unique_id']; ?>"> <?php $row2['name']; ?></option>' +
+                '<select class="form-select form-select-sm" name="supervisor_unique_id" aria-label=".form-select-sm example">' +
+                    '<option value="' + lecturer_unique_id + '" selected>Default</option>' +
+                    y +
                 '</select>' +
-                '<input id="supervisor_name" name="supervisor_name" type="hidden" class="form-control" value="'+ lecturer_unique_id +'" required> ' +
                 '</div>' +
                 '<div class="p-1"><!--extra Spacing--></div>' +
 
@@ -202,7 +220,6 @@ if(!isset($_SESSION['unique_id'])){
                 '<div class="p-1"><!--extra Spacing--></div>' ;
         }
     </script>
-
 </body>
 
 </html>
