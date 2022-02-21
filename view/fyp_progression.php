@@ -94,7 +94,6 @@ if(!isset($_SESSION['unique_id'])){
                                     }
                                 }
                                 mysqli_free_result($result);
-                                mysqli_close($conn);
                                 ?>
                                 </tbody>
                             </table>
@@ -129,7 +128,7 @@ if(!isset($_SESSION['unique_id'])){
         </div>
     </div>
 
-
+   <!-- <script src="../assets/javascript/supervisor_assign.js"></script> -->
 
 <script src="../assets/javascript/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../assets/javascript/dashboard.js"></script>
@@ -143,31 +142,42 @@ if(!isset($_SESSION['unique_id'])){
         $('a[href$="' + filename + '"]').addClass('active');
     });
 </script>
+    <?php
+        $sql2 = "SELECT * FROM lecturer";
+
+        $result = $conn ->query($sql2);
+            if (!empty($result) && $result->num_rows > 0) {
+                for ($i = 0; $i < mysqli_num_rows($result); $i++){
+                    $row2  = mysqli_fetch_assoc($result);
+
+                }
+            }
+            mysqli_close($conn);
+            ?>
+
 
     <script>
         function getDataForEdit(student_unique_id, lecturer_unique_id, progress_stage, proposal_due, final_due){
             return document.getElementById('assign-supervisor-modal-body').innerHTML =
                 '<div class="form-group">' +
                 '<label for="name">Name</label> ' +
-                '<input id="name" name="name" type="text" class="form-control" value="'+ name +'" readonly> ' +
+                '<input id="name" name="name" type="text" class="form-control" value="'+ student_unique_id +'" readonly> ' +
                 '</div>' +
                 '<div class="p-1"><!--extra Spacing--></div>' +
 
                 '<div class="form-group">' +
                 '<label for="supervisor_name">Supervisor Name</label> ' +
-                '<select class="form-select" aria-label="Default select example">' +
+                '<select class="form-select form-select-sm" aria-label=".form-select-sm example">' +
                     '<option selected>Select Supervisor</option>' +
-                    '<option value="1">One</option>' +
-                    '<option value="2">Two</option>' +
-                    '<option value="3">Three</option>' +
+                    '<option value = "<?php $row2['unique_id']; ?>"> <?php $row2['name']; ?></option>' +
                 '</select>' +
-                '<input id="supervisor_name" name="supervisor_name" type="text" class="form-control" value="'+ supervisor_name +'" required> ' +
+                '<input id="supervisor_name" name="supervisor_name" type="hidden" class="form-control" value="'+ lecturer_unique_id +'" required> ' +
                 '</div>' +
                 '<div class="p-1"><!--extra Spacing--></div>' +
 
                 '<div class="form-group">' +
                 '<label for="progress_stage">Progression Stage</label> ' +
-                '<select class="form-select" aria-label="Default select example">' +
+                '<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="progress_stage" required>' +
                     '<option selected>Select Progression Stage</option>' +
                     '<option value="1">Planning</option>' +
                     '<option value="2">Analysis</option>' +
@@ -176,7 +186,6 @@ if(!isset($_SESSION['unique_id'])){
                     '<option value="5">Test</option>' +
                     '<option value="6">Completed</option>' +
                 '</select>' +
-                '<input id="progress_stage" name="progress_stage" type="text" class="form-control" value="'+ progress_stage +'" required> ' +
                 '</div>' +
                 '<div class="p-1"><!--extra Spacing--></div>' +
 
