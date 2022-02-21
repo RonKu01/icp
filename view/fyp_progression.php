@@ -148,78 +148,78 @@ if(!isset($_SESSION['unique_id'])){
         </div>
     </div>
 
-   <!-- <script src="../assets/javascript/supervisor_assign.js"></script> -->
+    <script src="../assets/javascript/supervisor_assign.js"></script>
 
-<script src="../assets/javascript/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../assets/javascript/dashboard.js"></script>
-
-<script>
-    $(document).ready(function(){
-        // NavBar Active
-        $('a.active').removeClass('active');
-        var url = window.location.pathname;
-        var filename = url.substring(url.lastIndexOf('/')+1);
-        $('a[href$="' + filename + '"]').addClass('active');
-    });
-</script>
+    <script src="../assets/javascript/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../assets/javascript/dashboard.js"></script>
 
     <script>
-        function getDataForEdit(student_unique_id, student_name, lecturer_unique_id, progress_stage, proposal_due, final_due){
-
-            var lec_unique_id = <?php echo $encoded_lecturer_unique_id?>;
-            var lec_name = <?php echo $encoded_lecturer_name?>;
-
-            let y = '';
-
-            for(let i = 0; i < lec_unique_id.length; i++){
-                var z = '<option value="' + lec_unique_id[i] + '">' + lec_name[i] +'</option> +';
-                y = y.concat(z);
-            }
-
-            return document.getElementById('assign-supervisor-modal-body').innerHTML =
-                '<input id="student_unique_id" name="student_unique_id" type="hidden" value="'+ student_unique_id +'"> ' +
-                '<div class="form-group">' +
-                '<label for="name">Name</label> ' +
-                '<input id="name" name="name" type="text" class="form-control" value="'+ student_name +'" readonly> ' +
-                '</div>' +
-                '<div class="p-1"><!--extra Spacing--></div>' +
-
-                '<div class="form-group">' +
-                '<label for="supervisor_name">Supervisor Name</label> ' +
-                '<select class="form-select form-select-sm" name="supervisor_unique_id" aria-label=".form-select-sm example">' +
-                    '<option value="' + lecturer_unique_id + '" selected>Default</option>' +
-                    y +
-                '</select>' +
-                '</div>' +
-                '<div class="p-1"><!--extra Spacing--></div>' +
-
-                '<div class="form-group">' +
-                '<label for="progress_stage">Progression Stage</label> ' +
-                '<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="progress_stage" required>' +
-                    '<option selected>Select Progression Stage</option>' +
-                    '<option value="1">Planning</option>' +
-                    '<option value="2">Analysis</option>' +
-                    '<option value="3">Design</option>' +
-                    '<option value="4">Implementing</option>' +
-                    '<option value="5">Test</option>' +
-                    '<option value="6">Completed</option>' +
-                '</select>' +
-                '</div>' +
-                '<div class="p-1"><!--extra Spacing--></div>' +
-
-                '<div class="form-group">' +
-                '<label for="proposal_due">Midterm Due Date</label> ' +
-                '<input id="proposal_due" name="proposal_due" type="date" class="form-control" value="'+ proposal_due +'" required> ' +
-                '</div>' +
-                '<div class="p-1"><!--extra Spacing--></div>' +
-
-                '<div class="form-group">' +
-                '<label for="final_due">Final Due Date</label> ' +
-                '<input id="final_due" name="final_due" type="date" class="form-control" value="'+ final_due +'" required> ' +
-                '</div>' +
-                '<div class="p-1"><!--extra Spacing--></div>' ;
-        }
+        $(document).ready(function(){
+            // NavBar Active
+            $('a.active').removeClass('active');
+            var url = window.location.pathname;
+            var filename = url.substring(url.lastIndexOf('/')+1);
+            $('a[href$="' + filename + '"]').addClass('active');
+        });
     </script>
+
+        <script>
+            function getDataForEdit(student_unique_id, student_name, lecturer_unique_id, progress_stage, proposal_due, final_due){
+
+                var lec_unique_id = <?php echo $encoded_lecturer_unique_id?>;
+                var lec_name = <?php echo $encoded_lecturer_name?>;
+
+                let y = '';
+
+                for(let i = 0; i < lec_unique_id.length; i++){
+                    var z = '<option value="' + lec_unique_id[i] + '">' + lec_name[i] +'</option> +';
+                    y = y.concat(z);
+                }
+
+                return document.getElementById('assign-supervisor-modal-body').innerHTML =
+                    '<input id="student_unique_id" name="student_unique_id" type="hidden" value="'+ student_unique_id +'"> ' +
+                    '<div class="form-group">' +
+                    '<label for="name">Name</label> ' +
+                    '<input id="name" name="name" type="text" class="form-control" value="'+ student_name +'" readonly> ' +
+                    '</div>' +
+                    '<div class="p-1"><!--extra Spacing--></div>' +
+
+                    '<div class="form-group">' +
+                    '<label for="supervisor_name">Supervisor Name</label> ' +
+                    '<select class="form-select form-select-sm" name="supervisor_unique_id" aria-label=".form-select-sm example">' +
+                        '<option value="' + lecturer_unique_id + '" selected>Default</option>' +
+                        y +
+                    '</select>' +
+                    '</div>' +
+                    '<div class="p-1"><!--extra Spacing--></div>' +
+
+                    '<div class="form-group">' +
+                    '<label for="progress_stage">Progression Stage</label> ' +
+                    '<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="progress_stage" required>' +
+                        '<option selected>Select Progression Stage</option>' +
+                        '<option value="1">Planning</option>' +
+                        '<option value="2">Analysis</option>' +
+                        '<option value="3">Design</option>' +
+                        '<option value="4">Implementing</option>' +
+                        '<option value="5">Test</option>' +
+                        '<option value="6">Completed</option>' +
+                    '</select>' +
+                    '</div>' +
+                    '<div class="p-1"><!--extra Spacing--></div>' +
+
+                    '<div class="form-group">' +
+                    '<label for="proposal_due">Midterm Due Date</label> ' +
+                    '<input id="proposal_due" name="proposal_due" type="date" class="form-control" value="'+ proposal_due +'" required> ' +
+                    '</div>' +
+                    '<div class="p-1"><!--extra Spacing--></div>' +
+
+                    '<div class="form-group">' +
+                    '<label for="final_due">Final Due Date</label> ' +
+                    '<input id="final_due" name="final_due" type="date" class="form-control" value="'+ final_due +'" required> ' +
+                    '</div>' +
+                    '<div class="p-1"><!--extra Spacing--></div>' ;
+            }
+        </script>
 </body>
 
 </html>
