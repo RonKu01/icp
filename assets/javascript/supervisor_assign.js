@@ -1,5 +1,5 @@
 const form = document.querySelector("#editEmployeeModal > div > div > form");
-continueBtn = document.querySelector("#updateBtn");
+continueBtn = document.querySelector("#updateBtn")
 
 form.onsubmit = (e)=>{
     e.preventDefault();

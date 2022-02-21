@@ -101,6 +101,8 @@ if(!isset($_SESSION['unique_id'])){
                                             if($row['lecturer_unique_id']==0){
                                                 echo '<td>not_set</td>';
                                             }else{
+                                                $sql3 = "SELECT * FROM `lecturer` WHERE lecturer.unique_id = '{$unique_id}'";
+
                                                 echo '<td>'.$row['lecturer_unique_id'].'</td>';
                                             }
                                             echo '<td>'.$row['progress_stage'].'</td>';
@@ -185,7 +187,7 @@ if(!isset($_SESSION['unique_id'])){
                     '<div class="p-1"><!--extra Spacing--></div>' +
 
                     '<div class="form-group">' +
-                    '<label for="supervisor_name">Supervisor Name</label> ' +
+                    '<label for="supervisor_unique_id">Supervisor Name</label> ' +
                     '<select class="form-select form-select-sm" name="supervisor_unique_id" aria-label=".form-select-sm example">' +
                         '<option value="' + lecturer_unique_id + '" selected>Default</option>' +
                         y +
