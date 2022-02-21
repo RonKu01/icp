@@ -101,9 +101,13 @@ if(!isset($_SESSION['unique_id'])){
                                             if($row['lecturer_unique_id']==0){
                                                 echo '<td>not_set</td>';
                                             }else{
-                                                $sql3 = "SELECT * FROM `lecturer` WHERE lecturer.unique_id = '{$unique_id}'";
+                                                $sql3 = "SELECT * FROM `lecturer` WHERE lecturer.unique_id = '{$row['lecturer_unique_id']}'";
 
-                                                echo '<td>'.$row['lecturer_unique_id'].'</td>';
+                                                $result3 = $conn ->query($sql3);
+                                                if (!empty($result3) && $result3->num_rows > 0) {
+                                                    $row3  = mysqli_fetch_assoc($result3);
+                                                }
+                                                echo '<td>'.$row3['name'].'</td>';
                                             }
                                             echo '<td>'.$row['progress_stage'].'</td>';
                                             echo '<td>'.$row['proposal_due'].'</td>';
