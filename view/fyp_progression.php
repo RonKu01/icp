@@ -68,7 +68,7 @@ if(!isset($_SESSION['unique_id'])){
                                 </thead>
                                 <tbody>
                                 <?php
-                                $sql = "SELECT * FROM `progress` INNER JOIN student ON progress.student_unique_id = student.unique_id INNER JOIN lecturer ON progress.lecturer_unique_id = lecturer.unique_id";
+                                $sql = "SELECT * FROM `progress` INNER JOIN student ON progress.student_unique_id = student.unique_id";
 
                                 $result = $conn ->query($sql);
                                 if (!empty($result) && $result->num_rows > 0) {
@@ -78,8 +78,12 @@ if(!isset($_SESSION['unique_id'])){
                                         $unique_id = $row['unique_id'];
 
                                         echo '<tr>';
-                                        echo '<td>'.$row['student_unique_id'].'</td>';
-                                        echo '<td>'.$row['lecturer_unique_id'].'</td>';
+                                        echo '<td>'.$row['name'].'</td>';
+                                        if($row['lecturer_unique_id']==0){
+                                            echo '<td>not_set</td>';
+                                        }else{
+                                            echo '<td>'.$row['lecturer_unique_id'].'</td>';
+                                        }
                                         echo '<td>'.$row['progress_stage'].'</td>';
                                         echo '<td>'.$row['proposal_due'].'</td>';
                                         echo '<td>'.$row['final_due'].'</td>';
@@ -98,6 +102,27 @@ if(!isset($_SESSION['unique_id'])){
                     </div>
                 </div>
 
+                <!-- Assign Supervisor -->
+                <div id="editEmployeeModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form>
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Assign Supervisor</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="error-text" id="error-text"></div>
+                                    <div id="assign-supervisor-modal-body"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                    <input type="submit" id="updateBtn" class="btn btn-info" value="Save">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
 
             </main>
@@ -118,6 +143,56 @@ if(!isset($_SESSION['unique_id'])){
         $('a[href$="' + filename + '"]').addClass('active');
     });
 </script>
+
+    <script>
+        function getDataForEdit(student_unique_id, lecturer_unique_id, progress_stage, proposal_due, final_due){
+            return document.getElementById('assign-supervisor-modal-body').innerHTML =
+                '<div class="form-group">' +
+                '<label for="name">Name</label> ' +
+                '<input id="name" name="name" type="text" class="form-control" value="'+ name +'" readonly> ' +
+                '</div>' +
+                '<div class="p-1"><!--extra Spacing--></div>' +
+
+                '<div class="form-group">' +
+                '<label for="supervisor_name">Supervisor Name</label> ' +
+                '<select class="form-select" aria-label="Default select example">' +
+                    '<option selected>Select Supervisor</option>' +
+                    '<option value="1">One</option>' +
+                    '<option value="2">Two</option>' +
+                    '<option value="3">Three</option>' +
+                '</select>' +
+                '<input id="supervisor_name" name="supervisor_name" type="text" class="form-control" value="'+ supervisor_name +'" required> ' +
+                '</div>' +
+                '<div class="p-1"><!--extra Spacing--></div>' +
+
+                '<div class="form-group">' +
+                '<label for="progress_stage">Progression Stage</label> ' +
+                '<select class="form-select" aria-label="Default select example">' +
+                    '<option selected>Select Progression Stage</option>' +
+                    '<option value="1">Planning</option>' +
+                    '<option value="2">Analysis</option>' +
+                    '<option value="3">Design</option>' +
+                    '<option value="4">Implementing</option>' +
+                    '<option value="5">Test</option>' +
+                    '<option value="6">Completed</option>' +
+                '</select>' +
+                '<input id="progress_stage" name="progress_stage" type="text" class="form-control" value="'+ progress_stage +'" required> ' +
+                '</div>' +
+                '<div class="p-1"><!--extra Spacing--></div>' +
+
+                '<div class="form-group">' +
+                '<label for="proposal_due">Midterm Due Date</label> ' +
+                '<input id="proposal_due" name="proposal_due" type="date" class="form-control" value="'+ proposal_due +'" required> ' +
+                '</div>' +
+                '<div class="p-1"><!--extra Spacing--></div>' +
+
+                '<div class="form-group">' +
+                '<label for="final_due">Final Due Date</label> ' +
+                '<input id="final_due" name="final_due" type="date" class="form-control" value="'+ final_due +'" required> ' +
+                '</div>' +
+                '<div class="p-1"><!--extra Spacing--></div>' ;
+        }
+    </script>
 
 </body>
 
