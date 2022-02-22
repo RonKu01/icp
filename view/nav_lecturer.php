@@ -20,6 +20,18 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="list_student.php">
+                    <span data-feather="file"></span>
+                    Student List
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="list_supervisee.php">
+                    <span data-feather="file"></span>
+                    Supervisee List
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="chat_room.php">
                     <span data-feather="file"></span>
                     Chat Room
