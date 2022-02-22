@@ -104,7 +104,18 @@ if(!isset($_SESSION['unique_id'])){
                                         echo '<td>'.$row['cgpa'].'</td>';
                                         echo '<td>'.$row['phone_num'].'</td>';
                                         echo '<td>'.$row['fyp_title'].'</td>';
-                                        echo '<td>'.$row['supervisor_unique_id'].'</td>';
+
+                                        if($row['supervisor_unique_id']==0){
+                                            echo '<td>not_set</td>';
+                                        }else{
+                                            $sql2 = "SELECT * FROM `lecturer` WHERE lecturer.unique_id = '{$row['supervisor_unique_id']}'";
+
+                                            $result2 = $conn ->query($sql2);
+                                            if (!empty($result2) && $result2->num_rows > 0) {
+                                                $row2  = mysqli_fetch_assoc($result2);
+                                            }
+                                            echo '<td>'.$row2['name'].'</td>';
+                                        }
                                         echo '<td>'.$row['password'].'</td>';
                                         echo '<td>
                                                  <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$row['unique_id'].'`,`'.$row['name'].'`,`'.$row['email'].'`,`'.$row['programme'].'`,`'.$row['year'].'`,`'.$row['cgpa'].'`,`'.$row['phone_num'].'`,`'.$row['fyp_title'].'`,`'.$row['supervisor_unique_id'].'`,`'.$row['password'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
