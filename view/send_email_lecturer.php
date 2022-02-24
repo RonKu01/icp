@@ -40,7 +40,7 @@ if(!isset($_SESSION['unique_id'])){
 <div class="container-fluid" >
     <div class="row">
         <?php
-            require_once "nav_student.php";
+        require_once "nav_lecturer.php";
         ?>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -48,14 +48,77 @@ if(!isset($_SESSION['unique_id'])){
             <div class="py-3 px-2">
                 <div class="container-xl">
 
+                    <form id="myForm">
+                        <h2>Send an Email</h2>
+
+                        <label>Name</label>
+                        <input id="name" type="text" placeholder="Enter Name">
+                        <br><br>
+
+                        <label>Email</label>
+                        <input id="email" type="text" placeholder="Enter Email">
+                        <br><br>
+
+                        <label>Subject</label>
+                        <input id="subject" type="text" placeholder=" Enter Subject">
+                        <br><br>
+
+                        <p>Message</p>
+                        <textarea id="body" rows="5" placeholder="Type Message"></textarea>
+                        <br><br>
+
+                        <button type="button" onclick="sendEmail()" value="Send An Email">Submit</button>
+                    </form>
+                    </center>
+
+
                 </div>
             </div>
+
         </main>
+
+
     </div>
 </div>
 
 <script src="../assets/javascript/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../assets/javascript/dashboard.js"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    function sendEmail() {
+        var name = $("#name");
+        var email = $("#email");
+        var subject = $("#subject");
+        var body = $("#body");
+
+        if (isNotEmpty(name) && isNotEmpty(email) && isNotEmpty(subject) && isNotEmpty(body)) {
+            $.ajax({
+                url: '../controller/sendEmailToSupervisor.php',
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    name: name.val(),
+                    email: email.val(),
+                    subject: subject.val(),
+                    body: body.val()
+                }, success: function (response) {
+                    $('#myForm')[0].reset();
+                    $('.sent-notification').text("Message Sent Successfully.");
+                }
+            });
+        }
+    }
+
+    function isNotEmpty(caller) {
+        if (caller.val() == "") {
+            caller.css('border', '1px solid red');
+            return false;
+        } else
+            caller.css('border', '');
+
+        return true;
+    }
+</script>
 
 <script>
     $(document).ready(function(){
@@ -70,3 +133,9 @@ if(!isset($_SESSION['unique_id'])){
 </body>
 
 </html>
+
+
+
+
+
+

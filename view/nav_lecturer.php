@@ -32,6 +32,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="send_email_lecturer.php">
+                    <span data-feather="file"></span>
+                    Email
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="archive_login.php">
                     <span data-feather="file"></span>
                     Archive

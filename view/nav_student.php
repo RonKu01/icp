@@ -32,6 +32,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="send_email_student.php">
+                    <span data-feather="file"></span>
+                    Email
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="chat_room.php">
                     <span data-feather="file"></span>
                     Chat Room
