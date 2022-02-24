@@ -139,20 +139,20 @@ if(!isset($_SESSION['unique_id'])){
                                 </thead>
                                 <tbody>
                                     <?php
-                                $sql4 = "SELECT * FROM `logbook` WHERE student_unique_id = {$_SESSION['unique_id']} ORDER BY week ASC";
+                                        $sql4 = "SELECT * FROM `logbook` WHERE student_unique_id = {$_SESSION['unique_id']} ORDER BY week ASC";
 
-                                $result4 = $conn ->query($sql4);
-                                if (!empty($result4) && $result4->num_rows > 0) {
-                                    for ($i = 0; $i < mysqli_num_rows($result4); $i++){
-                                        $row4  = mysqli_fetch_assoc($result4);
-                                        echo '<tr>';
-                                        echo '<td>'.$row4['week'].'</td>';
-                                        echo '<td>'.$row4['content'].'</td>';
-                                        echo '</tr>';
-                                    }
-                                }
-                                mysqli_free_result($result4);
-                                ?>
+                                        $result4 = $conn ->query($sql4);
+                                        if (!empty($result4) && $result4->num_rows > 0) {
+                                            for ($i = 0; $i < mysqli_num_rows($result4); $i++){
+                                                $row4  = mysqli_fetch_assoc($result4);
+                                                echo '<tr>';
+                                                echo '<td>'.$row4['week'].'</td>';
+                                                echo '<td>'.$row4['content'].'</td>';
+                                                echo '</tr>';
+                                            }
+                                        }
+                                        mysqli_free_result($result4);
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
