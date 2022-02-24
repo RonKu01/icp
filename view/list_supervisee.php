@@ -55,7 +55,6 @@ if(!isset($_SESSION['unique_id'])){
             ?>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
                 <div class="container-xl">
                     <div class="table-responsive">
                         <div class="table-wrapper">
@@ -70,19 +69,16 @@ if(!isset($_SESSION['unique_id'])){
                                 <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Supervisor Name</th>
                                     <th>Progression Stage</th>
+                                    <th>Percentage</th>
                                     <th>Midterm Due Date</th>
                                     <th>Final Due Date</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-
-
-
                                     <?php
-                                    $sql = "SELECT * FROM `progress` INNER JOIN student ON progress.student_unique_id = student.unique_id";
+                                    $sql = "SELECT * FROM `progress` INNER JOIN student ON progress.student_unique_id = student.unique_id WHERE progress.lecturer_unique_id = {$_SESSION['unique_id']}";
 
                                     $lecturer_unique_id_list = array();
                                     $lecturer_name_list = array();
@@ -109,23 +105,14 @@ if(!isset($_SESSION['unique_id'])){
 
                                             echo '<tr>';
                                             echo '<td>'.$row['name'].'</td>';
-                                            if($row['lecturer_unique_id']==0){
-                                                echo '<td>not_set</td>';
-                                            }else{
-                                                $sql3 = "SELECT * FROM `lecturer` WHERE lecturer.unique_id = '{$row['lecturer_unique_id']}'";
-
-                                                $result3 = $conn ->query($sql3);
-                                                if (!empty($result3) && $result3->num_rows > 0) {
-                                                    $row3  = mysqli_fetch_assoc($result3);
-                                                }
-                                                echo '<td>'.$row3['name'].'</td>';
-                                            }
                                             echo '<td>'.$row['progress_stage'].'</td>';
+                                            echo '<td>'.$row['percent'].'%</td>';
                                             echo '<td>'.$row['proposal_due'].'</td>';
                                             echo '<td>'.$row['final_due'].'</td>';
                                             echo '<td>
-                                                     <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$row['student_unique_id'].'`,`'.$row['name'].'`,`'.$row['lecturer_unique_id'].'`,`'.$row['progress_stage'].'`,`'.$row['proposal_due'].'`,`'.$row['final_due'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                                   </td>';
+                                                     <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$row['student_unique_id'].'`,`'.$row['progress_stage'].'`,`'.$row['percent'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                                     <a href="logbook.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xe850;</i></a>
+                                                  </td>';
                                             echo '</tr>';
                                         }
                                     }
@@ -148,7 +135,6 @@ if(!isset($_SESSION['unique_id'])){
                                 </div>
                                 <div class="modal-body">
                                     <div class="error-text" id="error-text"></div>
-
                                     <div id="assign-supervisor-modal-body"></div>
                                 </div>
                                 <div class="modal-footer">
@@ -159,14 +145,11 @@ if(!isset($_SESSION['unique_id'])){
                         </div>
                     </div>
                 </div>
-
-
             </main>
         </div>
     </div>
 
-    <script src="../assets/javascript/supervisor_assign.js"></script>
-
+    <script src="../assets/javascript/update_progress.js"></script>
     <script src="../assets/javascript/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../assets/javascript/dashboard.js"></script>
 
@@ -180,63 +163,31 @@ if(!isset($_SESSION['unique_id'])){
         });
     </script>
 
-        <script>
-            function getDataForEdit(student_unique_id, student_name, lecturer_unique_id, progress_stage, proposal_due, final_due){
+    <script>
+        function getDataForEdit(student_unique_id, progress_stage, percent){
+            return document.getElementById('assign-supervisor-modal-body').innerHTML =
+                '<input id="student_unique_id" name="student_unique_id" type="hidden" value="'+ student_unique_id +'"> ' +
 
-                var lec_unique_id = <?php echo $encoded_lecturer_unique_id?>;
-                var lec_name = <?php echo $encoded_lecturer_name?>;
+                '<div class="form-group">' +
+                '<label for="progress_stage">Progression Stage</label> ' +
+                '<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="progress_stage" required>' +
+                    '<option value="' + progress_stage + '" selected> Current: ' + progress_stage + '</option>' +
+                    '<option value="Planning">Planning</option>' +
+                    '<option value="Analysis">Analysis</option>' +
+                    '<option value="Design">Design</option>' +
+                    '<option value="Implementing">Implementing</option>' +
+                    '<option value="Test">Test</option>' +
+                    '<option value="Completed">Completed</option>' +
+                '</select>' +
+                '</div>' +
+                '<div class="p-1"><!--extra Spacing--></div>' +
 
-                let y = '';
-
-                for(let i = 0; i < lec_unique_id.length; i++){
-                    var z = '<option value="' + lec_unique_id[i] + '">' + lec_name[i] +'</option> +';
-                    y = y.concat(z);
-                }
-
-                return document.getElementById('assign-supervisor-modal-body').innerHTML =
-                    '<input id="student_unique_id" name="student_unique_id" type="hidden" value="'+ student_unique_id +'"> ' +
-                    '<div class="form-group">' +
-                    '<label for="name">Name</label> ' +
-                    '<input id="name" name="name" type="text" class="form-control" value="'+ student_name +'" readonly> ' +
-                    '</div>' +
-                    '<div class="p-1"><!--extra Spacing--></div>' +
-
-                    '<div class="form-group">' +
-                    '<label for="supervisor_unique_id">Supervisor Name</label> ' +
-                    '<select class="form-select form-select-sm" name="supervisor_unique_id" aria-label=".form-select-sm example">' +
-                        '<option value="' + lecturer_unique_id + '" selected>Default</option>' +
-                        y +
-                    '</select>' +
-                    '</div>' +
-                    '<div class="p-1"><!--extra Spacing--></div>' +
-
-                    '<div class="form-group">' +
-                    '<label for="progress_stage">Progression Stage</label> ' +
-                    '<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="progress_stage" required>' +
-                        '<option selected>Select Progression Stage</option>' +
-                        '<option value="1">Planning</option>' +
-                        '<option value="2">Analysis</option>' +
-                        '<option value="3">Design</option>' +
-                        '<option value="4">Implementing</option>' +
-                        '<option value="5">Test</option>' +
-                        '<option value="6">Completed</option>' +
-                    '</select>' +
-                    '</div>' +
-                    '<div class="p-1"><!--extra Spacing--></div>' +
-
-                    '<div class="form-group">' +
-                    '<label for="proposal_due">Midterm Due Date</label> ' +
-                    '<input id="proposal_due" name="proposal_due" type="date" class="form-control" value="'+ proposal_due +'" required> ' +
-                    '</div>' +
-                    '<div class="p-1"><!--extra Spacing--></div>' +
-
-                    '<div class="form-group">' +
-                    '<label for="final_due">Final Due Date</label> ' +
-                    '<input id="final_due" name="final_due" type="date" class="form-control" value="'+ final_due +'" required> ' +
-                    '</div>' +
-                    '<div class="p-1"><!--extra Spacing--></div>' ;
-            }
-        </script>
+                '<div class="form-group">' +
+                '<label for="percent">Percentage</label> ' +
+                '<input id="percent" name="percent" type="number" min="0" max="100" class="form-control" value="'+ percent +'" required> ' +
+                '</div>' +
+                '<div class="p-1"><!--extra Spacing--></div>';
+        }
+    </script>
 </body>
-
 </html>

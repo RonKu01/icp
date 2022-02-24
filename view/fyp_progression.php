@@ -67,9 +67,6 @@ if(!isset($_SESSION['unique_id'])){
                                 </tr>
                                 </thead>
                                 <tbody>
-
-
-
                                     <?php
                                     $sql = "SELECT * FROM `progress` INNER JOIN student ON progress.student_unique_id = student.unique_id";
 
@@ -203,12 +200,12 @@ if(!isset($_SESSION['unique_id'])){
                     '<label for="progress_stage">Progression Stage</label> ' +
                     '<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="progress_stage" required>' +
                         '<option selected>Select Progression Stage</option>' +
-                        '<option value="1">Planning</option>' +
-                        '<option value="2">Analysis</option>' +
-                        '<option value="3">Design</option>' +
-                        '<option value="4">Implementing</option>' +
-                        '<option value="5">Test</option>' +
-                        '<option value="6">Completed</option>' +
+                        '<option value="Planning">Planning</option>' +
+                        '<option value="Analysis">Analysis</option>' +
+                        '<option value="Design">Design</option>' +
+                        '<option value="Implementing">Implementing</option>' +
+                        '<option value="Test">Test</option>' +
+                        '<option value="Completed">Completed</option>' +
                     '</select>' +
                     '</div>' +
                     '<div class="p-1"><!--extra Spacing--></div>' +
