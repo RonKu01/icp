@@ -86,7 +86,7 @@ if(!isset($_SESSION['unique_id'])){
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT * FROM `student` INNER JOIN userlogin ON student.unique_id = userlogin.unique_id";
+                                $sql = "SELECT * FROM `student` INNER JOIN userlogin ON student.unique_id = userlogin.unique_id ORDER BY student.id ASC";
 
                                 $result = $conn ->query($sql);
                                 if (!empty($result) && $result->num_rows > 0) {
