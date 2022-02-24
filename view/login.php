@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['unique_id'])){
-    header("location: chat_room.php");
+    header("location: dashboard_".$_SESSION['roles'].".php");
 }
 ?>
 
