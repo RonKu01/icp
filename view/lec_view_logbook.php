@@ -5,6 +5,9 @@ require_once "../controller/config.php";
 if(!isset($_SESSION['unique_id'])){
     header("location: login.php");
 }
+
+$studentid = $_GET['student_unique_id'];
+
 ?>
 
 <?php include_once "header.php"; ?>
@@ -66,9 +69,6 @@ if(!isset($_SESSION['unique_id'])){
                                     <div class="col-sm-6">
                                         <h5>Logbook History</h5>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <a href="#addLogbookModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Update Logbook</span></a>
-                                    </div>
                                 </div>
                             </div>
                             <table class="table table-striped table-hover">
@@ -80,7 +80,7 @@ if(!isset($_SESSION['unique_id'])){
                                 </thead>
                                 <tbody>
                                 <?php
-                                $sql4 = "SELECT * FROM `logbook` WHERE student_unique_id = {$_SESSION['unique_id']} ORDER BY week ASC";
+                                $sql4 = "SELECT * FROM `logbook` WHERE student_unique_id = {$studentid} ORDER BY week ASC";
 
                                 $result4 = $conn ->query($sql4);
                                 if (!empty($result4) && $result4->num_rows > 0) {
@@ -102,45 +102,12 @@ if(!isset($_SESSION['unique_id'])){
                 </div>
             </div>
 
-            <!-- Add Modal HTML -->
-            <div id="addLogbookModal" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form class="was-validated" action="#" method="POST" enctype="multipart/form-data" autocomplete="off" novalidate>
-                            <div class="modal-header">
-                                <h4 class="modal-title">Logbook</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <input type="hidden" name="student_unique_id" value="<?php echo $_SESSION['unique_id']; ?>">
-                                <div class="error-text"></div>
-
-                                <div class="form-group">
-                                    <label for="week">Week</label>
-                                    <input id="week" name="week" type="number" min="1" max="20" class="form-control" required>
-                                </div>
-                                <div class="p-1"><!--extra Spacing--></div>
-
-                                <div class="form-group">
-                                    <label for="content">Content</label>
-                                    <textarea class="form-control" id="content" name="content" rows="5"></textarea>
-                                </div>
-
-                            </div>
-                            <div class="modal-footer">
-                                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                                <input type="submit" id="addBtn" class="btn btn-success" value="Add">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </main>
 
 
     </div>
 </div>
-<script src="../assets/javascript/add_logbook.js"></script>
+
 <script src="../assets/javascript/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../assets/javascript/dashboard.js"></script>
 

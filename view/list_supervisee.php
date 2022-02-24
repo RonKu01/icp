@@ -69,32 +69,12 @@ if(!isset($_SESSION['unique_id'])){
                                 <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Progression Stage</th>
-                                    <th>Percentage</th>
-                                    <th>Midterm Due Date</th>
-                                    <th>Final Due Date</th>
-                                    <th>Action</th>
+                                    <th>Logbook</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $sql = "SELECT * FROM `progress` INNER JOIN student ON progress.student_unique_id = student.unique_id WHERE progress.lecturer_unique_id = {$_SESSION['unique_id']}";
-
-                                    $lecturer_unique_id_list = array();
-                                    $lecturer_name_list = array();
-
-                                    $sql2 = "SELECT * FROM `lecturer`";
-                                    $result2 = $conn -> query($sql2);
-                                    for ($i = 0; $i < mysqli_num_rows($result2); $i++) {
-                                        $row2 = mysqli_fetch_assoc($result2);
-                                        $lecturer_unique_id_list[$i] = $row2['unique_id'];
-                                        $lecturer_name_list[$i] = $row2['name'];
-                                    }
-
-                                    $encoded_lecturer_unique_id = json_encode($lecturer_unique_id_list);
-                                    $encoded_lecturer_name = json_encode($lecturer_name_list);
-
-                                    $lecturer_list_length = count($lecturer_unique_id_list);
+                                    $sql = "SELECT * FROM student WHERE supervisor_unique_id = {$_SESSION['unique_id']}";
 
                                     $result = $conn ->query($sql);
                                     if (!empty($result) && $result->num_rows > 0) {
@@ -105,13 +85,8 @@ if(!isset($_SESSION['unique_id'])){
 
                                             echo '<tr>';
                                             echo '<td>'.$row['name'].'</td>';
-                                            echo '<td>'.$row['progress_stage'].'</td>';
-                                            echo '<td>'.$row['percent'].'%</td>';
-                                            echo '<td>'.$row['proposal_due'].'</td>';
-                                            echo '<td>'.$row['final_due'].'</td>';
                                             echo '<td>
-                                                     <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$row['student_unique_id'].'`,`'.$row['progress_stage'].'`,`'.$row['percent'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                                     <a href="logbook.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xe850;</i></a>
+                                                     <a href="lec_view_logbook.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xe850;</i></a>
                                                   </td>';
                                             echo '</tr>';
                                         }
@@ -120,28 +95,6 @@ if(!isset($_SESSION['unique_id'])){
                                 ?>
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Assign Supervisor -->
-                <div id="editEmployeeModal" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <form>
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Assign Supervisor</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="error-text" id="error-text"></div>
-                                    <div id="assign-supervisor-modal-body"></div>
-                                </div>
-                                <div class="modal-footer">
-                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                                    <input type="submit" id="updateBtn" class="btn btn-info" value="Save">
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>

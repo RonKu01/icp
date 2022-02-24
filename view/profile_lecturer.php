@@ -109,14 +109,6 @@ if(!isset($_SESSION['unique_id'])){
                             </div>
 
                             <div class="col-12">
-                                <label for="interest" class="form-label">Interest</label>
-                                <input type="interest" class="form-control" id="interest" name="interest" value="<?php echo $result['interest']?>" required>
-                                <div class="invalid-feedback">
-                                    Please enter your Interest.
-                                </div>
-                            </div>
-
-                            <div class="col-12">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="password" name="password" value="<?php echo $result['password']?>" required>
                                 <div class="invalid-feedback">
