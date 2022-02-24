@@ -14,13 +14,13 @@ function LoadData(){
 
                 if(data[i].parent_topic_id == 0){
                     document.querySelector("#record")
-                    var row = $('<tr><td> <b>'+ data[i].category + ':</b> </br> <img src="../assets/image/avatar.jpg" width="30px" height="30px" /><b>' + data[i].name + '</b> :<i style="font-size: 12px"> '+ data[i].date + ':</i> </br><p style="padding-left:30px">' + data[i].post + '</br><a data-toggle="modal" data-id="'+ commentId +'" title="Reply" class="open-ReplyModal" href="#ReplyModal">Reply</a>'+'</p></td></tr>');
+                    var row = $('<tr><td> <b>'+ data[i].category + ':</b> </br> <img src="../assets/images/avatar.jpg" width="30px" height="30px" /><b>' + data[i].name + '</b> :<i style="font-size: 12px"> '+ data[i].date + ':</i> </br><p style="padding-left:30px">' + data[i].post + '</br><a data-toggle="modal" data-id="'+ commentId +'" title="Reply" class="open-ReplyModal" href="#ReplyModal">Reply</a>'+'</p></td></tr>');
                     $('#record').append(row);
                     for (var r = 0; (r < data.length); r++)
                     {
                         if ( data[r].parent_topic_id == commentId)
                         {
-                            var comments = $('<tr><td style="padding-left:80px"> <img src="../assets/image/avatar.jpg" width="30px" height="30px" /> <b>' + data[r].name + ' :<i style="font-size: 12px"> ' + data[r].date + ':</i></b></br><p style="padding-left:35px">'+ data[r].post +'</p></td></tr>');
+                            var comments = $('<tr><td style="padding-left:80px"> <img src="../assets/images/avatar.jpg" width="30px" height="30px" /> <b>' + data[r].name + ' :<i style="font-size: 12px"> ' + data[r].date + ':</i></b></br><p style="padding-left:35px">'+ data[r].post +'</p></td></tr>');
                             $('#record').append(comments);
                         }
                     }
