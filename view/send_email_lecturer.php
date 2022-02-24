@@ -55,8 +55,12 @@ if(!isset($_SESSION['unique_id'])){
                         <input id="name" type="text" placeholder="Enter Name">
                         <br><br>
 
-                        <label>Email</label>
-                        <input id="email" type="text" placeholder="Enter Email">
+                        <label>Sender Email</label>
+                        <input id="sender_email" type="text" placeholder="Enter Sender Email">
+                        <br><br>
+
+                        <label>Recipient Email</label>
+                        <input id="recipient_email" type="text" placeholder="Enter Sender Email">
                         <br><br>
 
                         <label>Subject</label>
@@ -70,7 +74,6 @@ if(!isset($_SESSION['unique_id'])){
                         <button type="button" onclick="sendEmail()" value="Send An Email">Submit</button>
                     </form>
                     </center>
-
 
                 </div>
             </div>
@@ -87,18 +90,20 @@ if(!isset($_SESSION['unique_id'])){
 <script type="text/javascript">
     function sendEmail() {
         var name = $("#name");
-        var email = $("#email");
+        var sender_email = $("#sender_email");
+        var recipient_email = $("#recipient_email");
         var subject = $("#subject");
         var body = $("#body");
 
-        if (isNotEmpty(name) && isNotEmpty(email) && isNotEmpty(subject) && isNotEmpty(body)) {
+        if (isNotEmpty(name) && isNotEmpty(sender_email) && isNotEmpty(recipient_email) && isNotEmpty(subject) && isNotEmpty(body)) {
             $.ajax({
-                url: '../controller/sendEmailToSupervisor.php',
+                url: '../controller/sendEmailToStudent.php',
                 method: 'POST',
                 dataType: 'json',
                 data: {
                     name: name.val(),
-                    email: email.val(),
+                    sender_email: sender_email.val(),
+                    recipient_email: recipient_email.val(),
                     subject: subject.val(),
                     body: body.val()
                 }, success: function (response) {
