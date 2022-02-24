@@ -72,14 +72,11 @@ if(!isset($_SESSION['unique_id'])){
                             <table class="table table-striped table-hover">
                                 <thead>
                                 <tr>
-                                    <th>Unique_ID</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Position</th>
                                     <th>Major</th>
-                                    <th>Research</th>
-                                    <th>Interest</th>
-                                    <th>password</th>
+                                    <th>Area of Research / Interest</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -95,16 +92,13 @@ if(!isset($_SESSION['unique_id'])){
                                             $unique_id = $row['unique_id'];
 
                                             echo '<tr>';
-                                            echo '<td>'.$row['unique_id'].'</td>';
                                             echo '<td>'.$row['name'].'</td>';
                                             echo '<td>'.$row['email'].'</td>';
                                             echo '<td>'.$row['position'].'</td>';
                                             echo '<td>'.$row['major'].'</td>';
                                             echo '<td>'.$row['research'].'</td>';
-                                            echo '<td>'.$row['interest'].'</td>';
-                                            echo '<td>'.$row['password'].'</td>';
                                             echo '<td>
-                                                     <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$row['unique_id'].'`,`'.$row['name'].'`,`'.$row['email'].'`,`'.$row['position'].'`,`'.$row['major'].'`,`'.$row['research'].'`,`'.$row['interest'].'`,`'.$row['password'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                                     <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$row['unique_id'].'`,`'.$row['name'].'`,`'.$row['email'].'`,`'.$row['position'].'`,`'.$row['major'].'`,`'.$row['research'].'`,`'.$row['password'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                                      <a href="#deleteEmployeeModal" onclick="return getDataForDlt(`'.$row['unique_id'].'`)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                                   </td>';
                                             echo '</tr>';
@@ -156,14 +150,8 @@ if(!isset($_SESSION['unique_id'])){
                                     <div class="p-1"><!--extra Spacing--></div>
 
                                     <div class="form-group">
-                                        <label for="research">Research</label>
-                                        <input id="research" name="research" type="text" class="form-control" required>
-                                    </div>
-                                    <div class="p-1"><!--extra Spacing--></div>
-
-                                    <div class="form-group">
-                                        <label for="interest">Interest</label>
-                                        <input id="interest" name="interest" type="text" class="form-control" required>
+                                        <label for="research">Area of Interest / Research</label>
+                                        <textarea class="form-control" id="research" name="research" rows="5" required></textarea>
                                     </div>
                                     <div class="p-1"><!--extra Spacing--></div>
 
@@ -252,7 +240,7 @@ if(!isset($_SESSION['unique_id'])){
     </script>
 
     <script>
-        function getDataForEdit(unique_id, name, email, position, major, research, interest, password){
+        function getDataForEdit(unique_id, name, email, position, major, research, password){
             return document.getElementById('edit-lecturer-modal-body').innerHTML =
             '<div class="form-group">' +
                 '<label for="unique_id">UniqueID</label> ' +
@@ -285,14 +273,8 @@ if(!isset($_SESSION['unique_id'])){
             '<div class="p-1"><!--extra Spacing--></div>' +
 
             '<div class="form-group">' +
-            '<label for="research">Research</label> ' +
-            '<input id="research" name="research" type="text" class="form-control" value="'+ research +'" required> ' +
-            '</div>' +
-            '<div class="p-1"><!--extra Spacing--></div>' +
-
-            '<div class="form-group">' +
-            '<label for="interest">Interest</label> ' +
-            '<input id="interest" name="interest" type="text" class="form-control" value="'+ interest +'" required> ' +
+            '<label for="research">Area of Interest / Research</label>' +
+            '<textarea class="form-control" id="research" name="research" rows="10" required>'+ research +'</textarea> ' +
             '</div>' +
             '<div class="p-1"><!--extra Spacing--></div>' +
 

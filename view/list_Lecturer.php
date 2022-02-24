@@ -68,13 +68,12 @@ if(!isset($_SESSION['unique_id'])){
                         <table class="table table-striped table-hover">
                             <thead>
                             <tr>
-                                <th>Unique_ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Position</th>
                                 <th>Major</th>
-                                <th>Research</th>
-                                <th>Interest</th>
+                                <th>Area of Interest / Research</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -89,13 +88,11 @@ if(!isset($_SESSION['unique_id'])){
                                     $unique_id = $row['unique_id'];
 
                                     echo '<tr>';
-                                    echo '<td>'.$row['unique_id'].'</td>';
                                     echo '<td>'.$row['name'].'</td>';
                                     echo '<td>'.$row['email'].'</td>';
                                     echo '<td>'.$row['position'].'</td>';
                                     echo '<td>'.$row['major'].'</td>';
                                     echo '<td>'.$row['research'].'</td>';
-                                    echo '<td>'.$row['interest'].'</td>';
                                     echo '</tr>';
                                 }
                             }

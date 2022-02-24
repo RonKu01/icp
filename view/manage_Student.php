@@ -80,7 +80,6 @@ if(!isset($_SESSION['unique_id'])){
                                 <th>Phone Number</th>
                                 <th>FYP Project Title</th>
                                 <th>Supervisor's Name</th>
-                                <th>password</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -92,9 +91,7 @@ if(!isset($_SESSION['unique_id'])){
                                 if (!empty($result) && $result->num_rows > 0) {
                                     for ($i = 0; $i < mysqli_num_rows($result); $i++){
                                         $row  = mysqli_fetch_assoc($result);
-
                                         $unique_id = $row['unique_id'];
-
                                         echo '<tr>';
                                         echo '<td>'.$row['unique_id'].'</td>';
                                         echo '<td>'.$row['name'].'</td>';
@@ -105,7 +102,7 @@ if(!isset($_SESSION['unique_id'])){
                                         echo '<td>'.$row['phone_num'].'</td>';
                                         echo '<td>'.$row['fyp_title'].'</td>';
 
-                                        if($row['supervisor_unique_id']==0){
+                                        if($row['supervisor_unique_id'] == 0 || $row['supervisor_unique_id'] == NULL){
                                             echo '<td>not_set</td>';
                                         }else{
                                             $sql2 = "SELECT * FROM `lecturer` WHERE lecturer.unique_id = '{$row['supervisor_unique_id']}'";
@@ -116,16 +113,15 @@ if(!isset($_SESSION['unique_id'])){
                                             }
                                             echo '<td>'.$row2['name'].'</td>';
                                         }
-                                        echo '<td>'.$row['password'].'</td>';
                                         echo '<td>
+                                                <a href="#assignSupervisorModal" class="edit" onclick="return assignSupervisor(`'.$row['unique_id'].'`)" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Assign">&#xE872;</i></a>
                                                  <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$row['unique_id'].'`,`'.$row['name'].'`,`'.$row['email'].'`,`'.$row['programme'].'`,`'.$row['year'].'`,`'.$row['cgpa'].'`,`'.$row['phone_num'].'`,`'.$row['fyp_title'].'`,`'.$row['supervisor_unique_id'].'`,`'.$row['password'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                                  <a href="#deleteEmployeeModal" onclick="return getDataForDlt(`'.$row['unique_id'].'`)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                               </td>';
                                         echo '</tr>';
                                     }
                                 }
-                                mysqli_free_result($result);
-                                mysqli_close($conn);
+
                                 ?>
                             </tbody>
                         </table>
@@ -246,6 +242,47 @@ if(!isset($_SESSION['unique_id'])){
                     </div>
                 </div>
             </div>
+
+            <!-- Assign Supervisor Modal HTML -->
+            <div id="assignSupervisorModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form id="assign">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Assign Supervisor</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="error-text" id="error-text"></div>
+                                <div id="assignSupervisor-modal-body"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                <input type="submit" id="btnAssign" class="btn btn-info" value="Save">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <?php
+                $lecturer_unique_id_list = array();
+                $lecturer_name_list = array();
+
+                $sql3 = "SELECT * FROM `lecturer`";
+                $result3 = $conn -> query($sql3);
+                for ($i = 0; $i < mysqli_num_rows($result3); $i++) {
+                    $row3 = mysqli_fetch_assoc($result3);
+                    $lecturer_unique_id_list[$i] = $row3['unique_id'];
+                    $lecturer_name_list[$i] = $row3['name'];
+                }
+
+                $encoded_lecturer_unique_id = json_encode($lecturer_unique_id_list);
+                $encoded_lecturer_name = json_encode($lecturer_name_list);
+                $lecturer_list_length = count($lecturer_unique_id_list);
+            ?>
+
+
         </main>
     </div>
 </div>
@@ -253,6 +290,8 @@ if(!isset($_SESSION['unique_id'])){
 <script src="../assets/javascript/add_Student.js"></script>
 <script src="../assets/javascript/update_Student.js"></script>
 <script src="../assets/javascript/delete_Student.js"></script>
+
+<script src="../assets/javascript/supervisor_assign.js"></script>
 
 <script src="../assets/javascript/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../assets/javascript/dashboard.js"></script>
@@ -320,12 +359,6 @@ if(!isset($_SESSION['unique_id'])){
         '<div class="p-1"><!--extra Spacing--></div>' +
 
         '<div class="form-group">' +
-        '<label for="supervisor_unique_id">Supervisor Name</label> ' +
-        '<input id="supervisor_unique_id" name="supervisor_unique_id" type="text" class="form-control" value="'+ supervisor_unique_id +'" required> ' +
-        '</div>' +
-        '<div class="p-1"><!--extra Spacing--></div>' +
-
-        '<div class="form-group">' +
         '<label for="password">Password</label> ' +
         '<input id="password" name="password" type="password" class="form-control" value="'+ password +'" required> ' +
         '</div>' +
@@ -343,6 +376,29 @@ if(!isset($_SESSION['unique_id'])){
             '<p class="text-warning">' +
             '<small>This action cannot be undone.</small>' +
             '</p>'
+    }
+
+    function assignSupervisor(unique_id){
+        var lec_unique_id = <?php echo $encoded_lecturer_unique_id?>;
+        var lec_name = <?php echo $encoded_lecturer_name?>;
+
+        let y = '';
+
+        for(let i = 0; i < lec_unique_id.length; i++){
+            var z = '<option value="' + lec_unique_id[i] + '">' + lec_name[i] +'</option> +';
+            y = y.concat(z);
+        }
+
+        return document.getElementById('assignSupervisor-modal-body').innerHTML =
+            '<input id="student_unique_id" name="student_unique_id" type="hidden" value="'+ unique_id +'"> ' +
+            '<div class="form-group">' +
+            '<label for="supervisor_unique_id">Supervisor Name</label> ' +
+            '<select class="form-select form-select-sm" name="supervisor_unique_id" aria-label=".form-select-sm example">' +
+            '<option value="" selected>Default</option>' +
+            y +
+            '</select>' +
+            '</div>' +
+            '<div class="p-1"><!--extra Spacing--></div>';
     }
 
 </script>

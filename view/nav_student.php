@@ -20,6 +20,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="logbook.php">
+                    <span data-feather="file"></span>
+                    Logbook
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="archive_login.php">
                     <span data-feather="file"></span>
                     Archive

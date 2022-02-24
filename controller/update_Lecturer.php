@@ -8,10 +8,9 @@
     $position = mysqli_real_escape_string($conn, $_POST['position']);
     $major = mysqli_real_escape_string($conn, $_POST['major']);
     $research = mysqli_real_escape_string($conn, $_POST['research']);
-    $interest = mysqli_real_escape_string($conn, $_POST['interest']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-    if(!empty($unique_id) &&!empty($name) && !empty($email) && !empty($position) && !empty($major) && !empty($research) && !empty($interest) && !empty($password)){
+    if(!empty($unique_id) &&!empty($name) && !empty($email) && !empty($position) && !empty($major) && !empty($research) && !empty($password)){
 
         $select_query = mysqli_query($conn, "SELECT * FROM userlogin WHERE unique_id = '{$unique_id}'");
 
@@ -22,7 +21,7 @@
                 $enc_pass = md5($password);
                 $update_query1 = mysqli_query($conn, "UPDATE `userlogin` SET `password`='".$enc_pass."' WHERE `unique_id`='".$unique_id."'");
             }
-            $update_query2 = mysqli_query($conn, "UPDATE `lecturer` SET `email`='".$email."',`position`='".$position."',`major`='".$major."',`research`='".$research."',`interest`='".$interest."' WHERE `unique_id`='".$unique_id."'");
+            $update_query2 = mysqli_query($conn, "UPDATE `lecturer` SET `email`='".$email."',`position`='".$position."',`major`='".$major."',`research`='".$research."' WHERE `unique_id`='".$unique_id."'");
 
             echo "Update Successfully";
 
