@@ -96,9 +96,17 @@ if(!isset($_SESSION['unique_id'])){
                                 <input type="cgpa" class="form-control" id="cgpa" name="cgpa" value="<?php echo $result['cgpa']?>" readonly>
                             </div>
 
+                            <?php
+                                $sql2 = "SELECT * FROM `lecturer` WHERE unique_id = '".$result['supervisor_unique_id']."'" ;
+                                $result2 = $conn -> query($sql2);
+                                for ($i = 0; $i < mysqli_num_rows($result2); $i++) {
+                                    $row2 = mysqli_fetch_assoc($result2);
+                                }
+                            ?>
+
                             <div class="col-12">
                                 <label for="supervisor_unique_id" class="form-label">Supervisor Name</label>
-                                <input type="supervisor_unique_id" class="form-control" id="supervisor_unique_id" name="supervisor_unique_id" value="<?php echo $result['supervisor_unique_id']?>" readonly>
+                                <input type="supervisor_unique_id" class="form-control" id="supervisor_unique_id" name="supervisor_unique_id" value="<?php echo $row2['name']?>" readonly>
                                 <div class="invalid-feedback">
                                 </div>
                             </div>
