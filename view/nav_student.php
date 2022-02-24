@@ -8,6 +8,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="profile_student.php">
+                    <span data-feather="file"></span>
+                    Student Profile
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="list_Lecturer.php">
                     <span data-feather="file"></span>
                     Lecturer List
