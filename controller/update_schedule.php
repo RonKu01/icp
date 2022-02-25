@@ -1,0 +1,17 @@
+<?php
+session_start();
+include_once "config.php";
+
+$id = mysqli_real_escape_string($conn, $_POST['id']);
+$week = mysqli_real_escape_string($conn, $_POST['week']);
+$task = mysqli_real_escape_string($conn, $_POST['task']);
+
+if(!empty($week)){
+
+        $update_query2 = mysqli_query($conn, "UPDATE `sys_dev_schedule` SET `task`='".$task."' WHERE `id`='".$id."'");
+        echo "success";
+
+}else{
+    echo "All input fields are required!";
+}
+?>

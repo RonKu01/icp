@@ -13,8 +13,8 @@ continueBtn2.onclick = ()=>{
       if(xhr.readyState === XMLHttpRequest.DONE){
           if(xhr.status === 200){
               let data = xhr.response;
-              if(data === "Update Successfully"){
-                location.href="../view/list_supervisee.php";
+              if(data === "success"){
+                location.href="../view/manage_sys_dev_schedule2.php";
               }else{
                   errorText2.style.display = "block";
                   errorText2.textContent = data;

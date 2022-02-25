@@ -20,6 +20,18 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="manage_sys_dev_schedule.php">
+                    <span data-feather="home"></span>
+                    FYP1 Schedule
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="manage_sys_dev_schedule2.php">
+                    <span data-feather="home"></span>
+                    FYP2 Schedule
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="chat_room.php">
                     <span data-feather="file"></span>
                     Chat Room
