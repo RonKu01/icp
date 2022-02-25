@@ -44,40 +44,47 @@ if(!isset($_SESSION['unique_id'])){
         ?>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="container-xl">
+                <div class="py-5 px-3">
+                    <div class="col-md-7 col-lg-4">
+                        <div id="msg_banner"></div>
+                        <h4 class="mb-3">Send Email</h4>
+                        <form class="needs-validation" novalidate>
+                            <div class="row g-2">
+                                <div class="col-12">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input id="name" type="text" placeholder="Enter Name" class="form-control" name="name">
+                                </div>
 
-            <div class="py-3 px-2">
-                <div class="container-xl">
+                                <div class="col-12">
+                                    <label for="sender_email" class="form-label">Sender Email</label>
+                                    <input id="sender_email" type="email" placeholder="Enter Sender Email" class="form-control">
+                                </div>
 
-                    <form id="myForm">
-                        <h2>Send an Email</h2>
+                                <div class="col-12">
+                                    <label for="recipient_email" class="form-label">Recipient Email</label>
+                                    <input id="recipient_email" type="email" placeholder="Enter Recipient Email" class="form-control">
+                                </div>
 
-                        <label>Name</label>
-                        <input id="name" type="text" placeholder="Enter Name">
-                        <br><br>
+                                <div class="col-12">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input id="subject" type="text" placeholder=" Enter Subject" class="form-control">
+                                </div>
 
-                        <label>Sender Email</label>
-                        <input id="sender_email" type="text" placeholder="Enter Sender Email">
-                        <br><br>
+                                <div class="col-12">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea id="body" rows="5" placeholder="Type Message" class="form-control"></textarea>
+                                </div>
 
-                        <label>Recipient Email</label>
-                        <input id="recipient_email" type="text" placeholder="Enter Sender Email">
-                        <br><br>
+                            </div>
 
-                        <label>Subject</label>
-                        <input id="subject" type="text" placeholder=" Enter Subject">
-                        <br><br>
+                            <hr class="my-4">
 
-                        <p>Message</p>
-                        <textarea id="body" rows="5" placeholder="Type Message"></textarea>
-                        <br><br>
-
-                        <button type="button" onclick="sendEmail()" value="Send An Email">Submit</button>
-                    </form>
-                    </center>
-
+                            <button type="button" onclick="sendEmail()" value="Send An Email" class="w-100 btn btn-primary btn-lg" >Submit</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-
         </main>
 
 
