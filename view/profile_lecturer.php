@@ -102,7 +102,7 @@ if(!isset($_SESSION['unique_id'])){
 
                             <div class="col-12">
                                 <label for="research" class="form-label">Research</label>
-                                <input type="research" class="form-control" id="research" name="research" value="<?php echo $result['research']?>" required>
+                                <textarea class="form-control" id="research" name="research" rows="5" required><?php echo $result['research']?></textarea>
                                 <div class="invalid-feedback">
                                     Please enter your Research.
                                 </div>
