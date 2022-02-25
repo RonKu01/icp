@@ -243,8 +243,8 @@ if(!isset($_SESSION['unique_id'])){
         function getDataForEdit(unique_id, name, email, position, major, research, password){
             return document.getElementById('edit-lecturer-modal-body').innerHTML =
             '<div class="form-group">' +
-                '<label for="unique_id">UniqueID</label> ' +
-                '<input id="unique_id" name="unique_id" type="text" class="form-control" value="'+ unique_id +'" readonly> ' +
+            '<label for="unique_id">UniqueID</label> ' +
+            '<input id="unique_id" name="unique_id" type="text" class="form-control" value="'+ unique_id +'" readonly> ' +
             '</div>' +
             '<div class="p-1"><!--extra Spacing--></div>' +
 

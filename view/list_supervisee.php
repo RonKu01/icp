@@ -70,6 +70,7 @@ if(!isset($_SESSION['unique_id'])){
                                 <tr>
                                     <th>Name</th>
                                     <th>Logbook</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -88,6 +89,9 @@ if(!isset($_SESSION['unique_id'])){
                                             echo '<td>
                                                      <a href="lec_view_logbook.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xe850;</i></a>
                                                   </td>';
+//                                            echo '<td>
+//                                                     <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$row['unique_id'].'`,`'.$row['name'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+//                                                  </td>';
                                             echo '</tr>';
                                         }
                                     }
@@ -95,6 +99,28 @@ if(!isset($_SESSION['unique_id'])){
                                 ?>
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edit Modal HTML -->
+                <div id="editEmployeeModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form>
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Edit Lecturer</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body" >
+                                    <div class="error-text" id="error-text"></div>
+                                    <div id="edit-lecturer-modal-body"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                    <input type="submit" id="updateBtn" class="btn btn-info" value="Save">
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
