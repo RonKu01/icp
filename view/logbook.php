@@ -76,6 +76,8 @@ if(!isset($_SESSION['unique_id'])){
                                 <tr>
                                     <th>Week</th>
                                     <th>Content</th>
+                                    <th>Lecturer Comments</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -89,6 +91,8 @@ if(!isset($_SESSION['unique_id'])){
                                         echo '<tr>';
                                         echo '<td>'.$row4['week'].'</td>';
                                         echo '<td>'.$row4['content'].'</td>';
+                                        echo '<td>'.$row4['comment'].'</td>';
+                                        echo '<td></td>';
                                         echo '</tr>';
                                     }
                                 }
