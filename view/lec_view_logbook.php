@@ -61,7 +61,6 @@ $studentid = $_GET['student_unique_id'];
 
             <div class="py-3 px-2">
                 <div class="container-xl">
-
                     <div class="table-responsive">
                         <div class="table-wrapper">
                             <div class="table-title">
@@ -76,6 +75,8 @@ $studentid = $_GET['student_unique_id'];
                                 <tr>
                                     <th>Week</th>
                                     <th>Content</th>
+                                    <th>Comments</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -89,6 +90,10 @@ $studentid = $_GET['student_unique_id'];
                                         echo '<tr>';
                                         echo '<td>'.$row4['week'].'</td>';
                                         echo '<td>'.$row4['content'].'</td>';
+                                        echo '<td>'.$row4['comment'].'</td>';
+                                        echo '<td>
+                                                 <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$studentid.'`,`'.$row4['week'].'`,`'.$row4['content'].'`,`'.$row4['comment'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Remarks">&#xE254;</i></a>
+                                              </td>';
                                         echo '</tr>';
                                     }
                                 }
@@ -98,7 +103,27 @@ $studentid = $_GET['student_unique_id'];
                             </table>
                         </div>
                     </div>
+                </div>
 
+                <div id="editEmployeeModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form>
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Comments LogBook</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body" >
+                                    <div class="error-text" id="error-text"></div>
+                                    <div id="logbook-comment-modal-body"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                    <input type="submit" id="updateBtn" class="btn btn-info" value="Save">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -107,6 +132,8 @@ $studentid = $_GET['student_unique_id'];
 
     </div>
 </div>
+
+<script src="../assets/javascript/lec_comment.js"></script>
 
 <script src="../assets/javascript/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../assets/javascript/dashboard.js"></script>
@@ -120,6 +147,33 @@ $studentid = $_GET['student_unique_id'];
         $('a[href$="' + filename + '"]').addClass('active');
     });
 </script>
+
+<script>
+    function getDataForEdit(student_unique_id, week, content, comment){
+        return document.getElementById('logbook-comment-modal-body').innerHTML =
+            '<input id="student_unique_id" name="student_unique_id" type="hidden" class="form-control" value="'+ student_unique_id +'" readonly> ' +
+
+            '<div class="form-group">' +
+            '<label for="week">Week</label> ' +
+            '<input id="week" name="week" type="text" class="form-control" value="'+ week +'" readonly> ' +
+            '</div>' +
+            '<div class="p-1"><!--extra Spacing--></div>' +
+
+            '<div class="form-group">' +
+            '<label for="content">Content</label> ' +
+            '<input id="content" name="content" type="text" class="form-control" value="'+ content +'" readonly> ' +
+            '</div>' +
+            '<div class="p-1"><!--extra Spacing--></div>' +
+
+            '<div class="form-group">' +
+            '<label for="comment">Comments</label> ' +
+            '<textarea id="comment" name="comment" rows="5" placeholder="Type Message" class="form-control" value="'+ comment +'" required>' +
+            '</textarea>' +
+            '</div>' +
+            '<div class="p-1"><!--extra Spacing--></div>' ;
+    }
+</script>
+
 
 </body>
 
