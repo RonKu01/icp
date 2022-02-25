@@ -49,7 +49,7 @@ if(!isset($_SESSION['unique_id'])){
                     <div class="col-md-7 col-lg-4">
                         <div id="msg_banner"></div>
                         <h4 class="mb-3">Send Email</h4>
-                        <form class="needs-validation" id="#emailForm" novalidate>
+                        <form class="needs-validation" id="emailForm" novalidate>
                             <div class="row g-2">
                                 <div class="col-12">
                                     <label for="name" class="form-label">Name</label>
