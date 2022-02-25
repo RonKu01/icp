@@ -40,7 +40,18 @@ if(!isset($_SESSION['unique_id'])){
 <div class="container-fluid" >
     <div class="row">
         <?php
-        require_once "nav_lecturer.php";
+        if ($_SESSION['roles'] == "Admin")
+        {
+            require_once "nav_admin.php";
+        }
+        else if ($_SESSION['roles'] == "Lecturer")
+        {
+            require_once "nav_lecturer.php";
+        }
+        else if ($_SESSION['roles'] == "Student")
+        {
+            require_once "nav_student.php";
+        }
         ?>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
