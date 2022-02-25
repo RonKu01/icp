@@ -13,8 +13,8 @@ continueBtn.onclick = ()=>{
       if(xhr.readyState === XMLHttpRequest.DONE){
           if(xhr.status === 200){
               let data = xhr.response;
-              if(data === "Update Successfully"){
-                location.href="../view/lec_view_logbook.php";
+              if(data === "success"){
+                location.href="../view/list_supervisee.php";
               }else{
                   errorText.style.display = "block";
                   errorText.textContent = data;

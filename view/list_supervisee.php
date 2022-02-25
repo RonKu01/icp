@@ -69,8 +69,9 @@ if(!isset($_SESSION['unique_id'])){
                                 <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th></th>
+                                    <th>Last Progression Review Comments</th>
                                     <th>Logbook</th>
-                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -81,17 +82,19 @@ if(!isset($_SESSION['unique_id'])){
                                     if (!empty($result) && $result->num_rows > 0) {
                                         for ($i = 0; $i < mysqli_num_rows($result); $i++){
                                             $row  = mysqli_fetch_assoc($result);
-
                                             $unique_id = $row['unique_id'];
+
+                                            $sql2 = "SELECT `comment` FROM logbook WHERE student_unique_id = '{$unique_id}' ORDER BY `id` DESC LIMIT 1;";
+                                            $resul2 = $conn ->query($sql2);
+                                            $row2 = mysqli_fetch_assoc($resul2);
 
                                             echo '<tr>';
                                             echo '<td>'.$row['name'].'</td>';
+                                            echo '<td></td>';
+                                            echo '<td>'.$row2['comment'].'</td>';
                                             echo '<td>
                                                      <a href="lec_view_logbook.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xe850;</i></a>
                                                   </td>';
-//                                            echo '<td>
-//                                                     <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$row['unique_id'].'`,`'.$row['name'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-//                                                  </td>';
                                             echo '</tr>';
                                         }
                                     }

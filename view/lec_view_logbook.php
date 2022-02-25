@@ -87,17 +87,19 @@ $studentid = $_GET['student_unique_id'];
                                 if (!empty($result4) && $result4->num_rows > 0) {
                                     for ($i = 0; $i < mysqli_num_rows($result4); $i++){
                                         $row4  = mysqli_fetch_assoc($result4);
+
+                                        $id = $row4['id'];
+
                                         echo '<tr>';
                                         echo '<td>'.$row4['week'].'</td>';
                                         echo '<td>'.$row4['content'].'</td>';
                                         echo '<td>'.$row4['comment'].'</td>';
                                         echo '<td>
-                                                 <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$studentid.'`,`'.$row4['week'].'`,`'.$row4['content'].'`,`'.$row4['comment'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Remarks">&#xE254;</i></a>
+                                                 <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$id.'`,`'.$row4['week'].'`,`'.$row4['content'].'`,`'.$row4['comment'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Remarks">&#xE254;</i></a>
                                               </td>';
                                         echo '</tr>';
                                     }
                                 }
-                                mysqli_free_result($result4);
                                 ?>
                                 </tbody>
                             </table>
@@ -149,9 +151,9 @@ $studentid = $_GET['student_unique_id'];
 </script>
 
 <script>
-    function getDataForEdit(student_unique_id, week, content, comment){
+    function getDataForEdit(id, week, content, comment){
         return document.getElementById('logbook-comment-modal-body').innerHTML =
-            '<input id="student_unique_id" name="student_unique_id" type="hidden" class="form-control" value="'+ student_unique_id +'" readonly> ' +
+            '<input id="id" name="id" type="hidden" class="form-control" value="'+ id +'" readonly> ' +
 
             '<div class="form-group">' +
             '<label for="week">Week</label> ' +
