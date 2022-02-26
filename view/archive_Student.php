@@ -23,7 +23,6 @@ if(!isset($_SESSION['unique_id'])){
         </form>
       </div>
     </div>
-
     <script src="../assets/javascript/uploadFile.js"></script>
   </body>
 </html>

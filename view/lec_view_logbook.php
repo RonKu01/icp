@@ -7,7 +7,6 @@ if(!isset($_SESSION['unique_id'])){
 }
 
 $studentid = $_GET['student_unique_id'];
-
 ?>
 
 <?php include_once "header.php"; ?>
