@@ -1,4 +1,4 @@
-const form2 = document.querySelector("#editEmployeeModal > div > div > form"),
+const form2 = document.querySelector("#editEmployeeModal > div > div > form");
 continueBtn2 = form2.querySelector("#updateBtn");
 errorText2 = document.querySelector("#error-text");
 

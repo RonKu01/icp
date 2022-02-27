@@ -93,7 +93,7 @@ if(!isset($_SESSION['unique_id'])){
                                             echo '<td>'.$row['week'].'</td>';
                                             echo '<td>'.$row['task'].'</td>';
                                             echo '<td>
-                                             <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$id.'`,`'.$fyp_type.'`,`'.$row['week'].'`,`'.$row['task'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                             <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$id.'`,`'.$fyp_type.'`,`'.$row['week'].'`,`'.$row['task'].'`,`'.$row['remark'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                              <a href="#deleteEmployeeModal" onclick="return getDataForDlt(`'.$id.'`)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                          </td>';
                                             echo '</tr>';
@@ -131,6 +131,13 @@ if(!isset($_SESSION['unique_id'])){
                                     <textarea id="task" name="task" rows="5" class="form-control"></textarea>
                                 </div>
                                 <div class="p-1"><!--extra Spacing--></div>
+
+                                <div class="form-group">
+                                    <input type="checkbox" id="remark" name="remark" value="remark">
+                                    <label for="remark"> Submission</label><br>
+                                </div>
+                                <div class="p-1"><!--extra Spacing--></div>
+
                             </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -211,7 +218,7 @@ if(!isset($_SESSION['unique_id'])){
 </script>
 
 <script>
-    function getDataForEdit(id, fyp_type, week, task){
+    function getDataForEdit(id, fyp_type, week, task, remark){
         return document.getElementById('edit-schedule-modal-body').innerHTML =
             '<input id="id" name="id" type="hidden" class="form-control" value="'+ id +'"> ' +
 
@@ -222,10 +229,17 @@ if(!isset($_SESSION['unique_id'])){
             '<div class="p-1"><!--extra Spacing--></div>' +
 
             '<div class="form-group">' +
-            '<label for="task">Email</label>' +
+            '<label for="task">Task</label>' +
             '<textarea id="task" name="task" rows="5" class="form-control">' + task + '</textarea> ' +
             '</div>' +
+            '<div class="p-1"><!--extra Spacing--></div>' +
+
+            '<div class="form-group">' +
+            '<input id="remark" name="remark" type="checkbox" value="'+ remark +'"> ' +
+            '<label for="remark">Submission</label>' +
+            '</div>' +
             '<div class="p-1"><!--extra Spacing--></div>';
+
     }
 
     function getDataForDlt(id){
