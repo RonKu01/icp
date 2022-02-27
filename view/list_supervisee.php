@@ -69,9 +69,9 @@ if(!isset($_SESSION['unique_id'])){
                                 <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th></th>
                                     <th>Last Progression Review Comments</th>
-                                    <th>Logbook</th>
+                                    <th>Meeting Date</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -88,12 +88,17 @@ if(!isset($_SESSION['unique_id'])){
                                             $resul2 = $conn ->query($sql2);
                                             $row2 = mysqli_fetch_assoc($resul2);
 
+                                            $sql3 = "SELECT `start_event` FROM meeting WHERE student_unique_id = '{$unique_id}' ORDER BY `id` DESC LIMIT 1;";
+                                            $resul3 = $conn ->query($sql3);
+                                            $row3 = mysqli_fetch_assoc($resul3);
+
                                             echo '<tr>';
                                             echo '<td>'.$row['name'].'</td>';
-                                            echo '<td></td>';
                                             echo '<td>'.$row2['comment'].'</td>';
+                                            echo '<td>'.$row3['start_event'].'</td>';
                                             echo '<td>
-                                                     <a href="lec_view_logbook.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xe850;</i></a>
+                                                      <a href="lec_view_logbook.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xe850;</i></a>
+                                                      <a href="schedule_meeting.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xe850;</i></a>
                                                   </td>';
                                             echo '</tr>';
                                         }
