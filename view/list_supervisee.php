@@ -5,6 +5,7 @@ require_once "../controller/config.php";
 if(!isset($_SESSION['unique_id'])){
     header("location: login.php");
 }
+
 ?>
 
 <?php include_once "header.php"; ?>
@@ -69,38 +70,93 @@ if(!isset($_SESSION['unique_id'])){
                                 <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Last Progression Review Comments</th>
+                                    <th>Logbook Comments</th>
                                     <th>Meeting Date</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    $sql = "SELECT * FROM student WHERE supervisor_unique_id = {$_SESSION['unique_id']}";
+                                <?php
+                                $sql = "SELECT * FROM student WHERE supervisor_unique_id = {$_SESSION['unique_id']}";
 
+                                $result = $conn ->query($sql);
+                                if (!empty($result) && $result->num_rows > 0) {
+                                    for ($i = 0; $i < mysqli_num_rows($result); $i++){
+                                        $row  = mysqli_fetch_assoc($result);
+                                        $unique_id = $row['unique_id'];
+
+                                        $sql2 = "SELECT `comment` FROM logbook WHERE student_unique_id = '{$unique_id}' ORDER BY `id` DESC LIMIT 1;";
+                                        $resul2 = $conn ->query($sql2);
+                                        $row2 = mysqli_fetch_assoc($resul2);
+
+                                        $sql3 = "SELECT `start_event` FROM meeting WHERE student_unique_id = '{$unique_id}' ORDER BY `id` DESC LIMIT 1;";
+                                        $resul3 = $conn ->query($sql3);
+                                        $row3 = mysqli_fetch_assoc($resul3);
+
+                                        $msg = $row3['start_event'] ?? 'No meeting schedule.';
+
+                                        echo '<tr>';
+                                        echo '<td>'.$row['name'].'</td>';
+                                        echo '<td>'.$row2['comment'].'</td>';
+                                        echo '<td>'.$msg.'</td>';
+                                        echo '<td>
+                                              <a href="lec_view_logbook.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Logbook">&#xe850;</i></a>
+                                              <a href="schedule_meeting.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Schedule Meeting">&#xe850;</i></a>
+                                              <a href="grade.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Grade">&#xe850;</i></a>
+                                               <a href="summary_grade.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Grade">&#xe850;</i></a>
+                                          </td>';
+                                        echo '</tr>';
+                                    }
+                                }
+                                mysqli_free_result($result);
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <div class="table-wrapper">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h2><b>Second Marker's List</b></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Comment</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                    $sql = "SELECT * FROM student WHERE second_marker_unique_id = {$_SESSION['unique_id']}";
                                     $result = $conn ->query($sql);
                                     if (!empty($result) && $result->num_rows > 0) {
                                         for ($i = 0; $i < mysqli_num_rows($result); $i++){
                                             $row  = mysqli_fetch_assoc($result);
                                             $unique_id = $row['unique_id'];
 
-                                            $sql2 = "SELECT `comment` FROM logbook WHERE student_unique_id = '{$unique_id}' ORDER BY `id` DESC LIMIT 1;";
-                                            $resul2 = $conn ->query($sql2);
-                                            $row2 = mysqli_fetch_assoc($resul2);
-
-                                            $sql3 = "SELECT `start_event` FROM meeting WHERE student_unique_id = '{$unique_id}' ORDER BY `id` DESC LIMIT 1;";
-                                            $resul3 = $conn ->query($sql3);
-                                            $row3 = mysqli_fetch_assoc($resul3);
-
-                                            $msg = $row3['start_event'] ?? 'No meeting schedule.';
-
                                             echo '<tr>';
                                             echo '<td>'.$row['name'].'</td>';
-                                            echo '<td>'.$row2['comment'].'</td>';
-                                            echo '<td>'.$msg.'</td>';
+
+                                            $sql2 = "SELECT sec_marker_comment FROM grade WHERE student_unique_id = {$unique_id}";
+                                            $result2 = $conn ->query($sql2);
+                                            if (!empty($result2) && $result2->num_rows > 0) {
+                                                $row2 = mysqli_fetch_assoc($result2);
+                                            }
+
+                                            if($row2['sec_marker_comment'] == 0 || $row2['sec_marker_comment'] == NULL){
+                                                echo '<td>not_set</td>';
+                                            }else{
+                                                echo '<td>'.$sec_marker_comment = $row2['sec_marker_comment'].'</td>';
+                                            }
+
                                             echo '<td>
-                                                      <a href="lec_view_logbook.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xe850;</i></a>
-                                                      <a href="schedule_meeting.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xe850;</i></a>
+                                                      <a href="second_marker_grade.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Grade">&#xe850;</i></a>
                                                   </td>';
                                             echo '</tr>';
                                         }
@@ -112,7 +168,7 @@ if(!isset($_SESSION['unique_id'])){
                         </div>
                     </div>
                 </div>
-
+                </div>
                 <!-- Edit Modal HTML -->
                 <div id="editEmployeeModal" class="modal fade">
                     <div class="modal-dialog">

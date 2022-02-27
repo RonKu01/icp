@@ -80,6 +80,7 @@ if(!isset($_SESSION['unique_id'])){
                                 <th>Phone Number</th>
                                 <th>FYP Project Title</th>
                                 <th>Supervisor's Name</th>
+                                <th>Second Marker's Name</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -112,6 +113,17 @@ if(!isset($_SESSION['unique_id'])){
                                                 $row2  = mysqli_fetch_assoc($result2);
                                             }
                                             echo '<td>'.$row2['name'].'</td>';
+                                        }
+                                        if($row['second_marker_unique_id'] == 0 || $row['second_marker_unique_id'] == NULL){
+                                            echo '<td>not_set</td>';
+                                        }else{
+                                            $sql3 = "SELECT * FROM `lecturer` WHERE lecturer.unique_id = '{$row['second_marker_unique_id']}'";
+
+                                            $result3 = $conn ->query($sql3);
+                                            if (!empty($result3) && $result3->num_rows > 0) {
+                                                $row3  = mysqli_fetch_assoc($result3);
+                                            }
+                                            echo '<td>'.$row3['name'].'</td>';
                                         }
                                         echo '<td>
                                                 <a href="#assignSupervisorModal" class="edit" onclick="return assignSupervisor(`'.$row['unique_id'].'`)" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Assign">&#xE872;</i></a>
@@ -394,6 +406,15 @@ if(!isset($_SESSION['unique_id'])){
             '<div class="form-group">' +
             '<label for="supervisor_unique_id">Supervisor Name</label> ' +
             '<select class="form-select form-select-sm" name="supervisor_unique_id" aria-label=".form-select-sm example">' +
+            '<option value="" selected>Default</option>' +
+            y +
+            '</select>' +
+            '</div>' +
+            '<div class="p-1"><!--extra Spacing--></div>' +
+
+            '<div class="form-group">' +
+            '<label for="second_marker_unique_id">Second Marker\'s Name</label> ' +
+            '<select class="form-select form-select-sm" name="second_marker_unique_id" aria-label=".form-select-sm example">' +
             '<option value="" selected>Default</option>' +
             y +
             '</select>' +

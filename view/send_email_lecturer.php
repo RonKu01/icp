@@ -91,7 +91,7 @@ if(!isset($_SESSION['unique_id'])){
 
                             <hr class="my-4">
 
-                            <button type="button" onclick="sendEmail()" value="Send An Email" class="w-100 btn btn-primary btn-lg" >Submit</button>
+                            <button type="button" onclick="sendEmail()" value="Send An Email" class="w-100 btn btn-primary btn-lg">Submit</button>
                         </form>
                     </div>
                 </div>
