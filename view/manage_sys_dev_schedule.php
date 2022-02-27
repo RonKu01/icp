@@ -55,7 +55,6 @@ if(!isset($_SESSION['unique_id'])){
         }
         ?>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
             <div class="container-xl ">
                 <div class="table-responsive">
                             <div class="table-wrapper">
@@ -114,6 +113,8 @@ if(!isset($_SESSION['unique_id'])){
                     <div class="modal-content">
                         <form class="was-validated" action="#" method="POST" enctype="multipart/form-data" autocomplete="off" novalidate>
                             <input id="fyp_type" name="fyp_type" type="hidden" class="form-control" value="fyp1">
+                            <input id="add_remark_submission" name="add_remark_submission" type="hidden" value="">
+
                             <div class="modal-header">
                                 <h4 class="modal-title">Add Schedule</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -133,8 +134,8 @@ if(!isset($_SESSION['unique_id'])){
                                 <div class="p-1"><!--extra Spacing--></div>
 
                                 <div class="form-group">
-                                    <input type="checkbox" id="remark" name="remark" value="remark">
-                                    <label for="remark"> Submission</label><br>
+                                    <input type="checkbox" id="add_remark" />
+                                    <label for="add_remark"> Submission</label><br>
                                 </div>
                                 <div class="p-1"><!--extra Spacing--></div>
 
@@ -214,6 +215,18 @@ if(!isset($_SESSION['unique_id'])){
         var url = window.location.pathname;
         var filename = url.substring(url.lastIndexOf('/')+1);
         $('a[href$="' + filename + '"]').addClass('active');
+
+        $('#add_remark').click(function(){
+            if($(this).prop("checked") == true){
+                document.getElementById("add_remark_submission").value = "Submission";
+                console.log("Checkbox is checked.");
+
+            }
+            else if($(this).prop("checked") == false){
+                console.log("Checkbox is unchecked.");
+                document.getElementById('add_remark_submission').value = '';
+            }
+        });
     });
 </script>
 
@@ -221,6 +234,7 @@ if(!isset($_SESSION['unique_id'])){
     function getDataForEdit(id, fyp_type, week, task, remark){
         return document.getElementById('edit-schedule-modal-body').innerHTML =
             '<input id="id" name="id" type="hidden" class="form-control" value="'+ id +'"> ' +
+            '<input id="edit_remark_submission" name="edit_remark_submission" type="hidden" value=""> ' +
 
             '<div class="form-group">' +
             '<label for="week">Week</label> ' +
@@ -235,11 +249,10 @@ if(!isset($_SESSION['unique_id'])){
             '<div class="p-1"><!--extra Spacing--></div>' +
 
             '<div class="form-group">' +
-            '<input id="remark" name="remark" type="checkbox" value="'+ remark +'"> ' +
-            '<label for="remark">Submission</label>' +
+            '<input id="edit_remark" type="checkbox" onclick="edit_checkBox()" /> ' +
+            '<label for="edit_remark">Submission</label>' +
             '</div>' +
             '<div class="p-1"><!--extra Spacing--></div>';
-
     }
 
     function getDataForDlt(id){
@@ -253,16 +266,16 @@ if(!isset($_SESSION['unique_id'])){
             '<small>This action cannot be undone.</small>' +
             '</p>';
     }
-</script>
 
-<script>
-    $(document).ready(function(){
-        // NavBar Active
-        $('a.active').removeClass('active');
-        var url = window.location.pathname;
-        var filename = url.substring(url.lastIndexOf('/')+1);
-        $('a[href$="' + filename + '"]').addClass('active');
-    });
+    function edit_checkBox(){
+        var checkBox = document.getElementById("edit_remark");
+        if (checkBox.checked == true){
+            document.getElementById("edit_remark_submission").value = "Submission";
+        } else {
+            document.getElementById('edit_remark_submission').value = '';
+        }
+    }
+
 </script>
 
 </body>
