@@ -5,6 +5,7 @@ include_once "config.php";
 $id = mysqli_real_escape_string($conn, $_POST['id']);
 $week = mysqli_real_escape_string($conn, $_POST['week']);
 $task = mysqli_real_escape_string($conn, $_POST['task']);
+$remark = mysqli_real_escape_string($conn, $_POST['remark']);
 
 if(!empty($week)){
 
