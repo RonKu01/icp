@@ -92,10 +92,12 @@ if(!isset($_SESSION['unique_id'])){
                                             $resul3 = $conn ->query($sql3);
                                             $row3 = mysqli_fetch_assoc($resul3);
 
+                                            $msg = $row3['start_event'] ?? 'No meeting schedule.';
+
                                             echo '<tr>';
                                             echo '<td>'.$row['name'].'</td>';
                                             echo '<td>'.$row2['comment'].'</td>';
-                                            echo '<td>'.$row3['start_event'].'</td>';
+                                            echo '<td>'.$msg.'</td>';
                                             echo '<td>
                                                       <a href="lec_view_logbook.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xe850;</i></a>
                                                       <a href="schedule_meeting.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xe850;</i></a>

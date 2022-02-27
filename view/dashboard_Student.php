@@ -44,90 +44,93 @@ if(!isset($_SESSION['unique_id'])){
         ?>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="container-xl ">
-                <div class="table-responsive">
-                    <div class="table-wrapper">
-                        <div class="table-title">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <h2><b>FYP1 Schedule</b></h2>
+            <div class="pt-5">
+                <div class="container-xl ">
+                    <div class="row align-items-start">
+                        <div class="col">
+                            <div class="table-responsive-sm">
+                                <div class="table-wrapper">
+                                    <div class="table-title">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <h4><b>FYP1 Schedule</b></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Week</th>
+                                            <th>Task</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        $sql = "SELECT * FROM `sys_dev_schedule` WHERE fyp_type = 'fyp1'";
+
+                                        $result = $conn ->query($sql);
+                                        if (!empty($result) && $result->num_rows > 0) {
+                                            for ($i = 0; $i < mysqli_num_rows($result); $i++){
+                                                $row  = mysqli_fetch_assoc($result);
+
+                                                $id = $row['id'];
+                                                $fyp_type = $row['fyp_type'];
+
+                                                echo '<tr>';
+                                                echo '<td>'.$row['week'].'</td>';
+                                                echo '<td>'.$row['task'].'</td>';
+                                                echo '</tr>';
+                                            }
+                                        }
+                                        ?>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>Week</th>
-                                <th>Task</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            $sql = "SELECT * FROM `sys_dev_schedule` WHERE fyp_type = 'fyp1'";
+                        <div class="col">
+                            <div class="table-responsive-sm">
+                                <div class="table-wrapper">
+                                    <div class="table-title">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <h4><b>FYP2 Schedule</b></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Week</th>
+                                            <th>Task</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        $sql = "SELECT * FROM `sys_dev_schedule` WHERE fyp_type = 'fyp2'";
 
-                            $result = $conn ->query($sql);
-                            if (!empty($result) && $result->num_rows > 0) {
-                                for ($i = 0; $i < mysqli_num_rows($result); $i++){
-                                    $row  = mysqli_fetch_assoc($result);
+                                        $result = $conn ->query($sql);
+                                        if (!empty($result) && $result->num_rows > 0) {
+                                            for ($i = 0; $i < mysqli_num_rows($result); $i++){
+                                                $row  = mysqli_fetch_assoc($result);
 
-                                    $id = $row['id'];
-                                    $fyp_type = $row['fyp_type'];
+                                                $id = $row['id'];
+                                                $fyp_type = $row['fyp_type'];
 
-                                    echo '<tr>';
-                                    echo '<td>'.$row['week'].'</td>';
-                                    echo '<td>'.$row['task'].'</td>';
-                                    echo '</tr>';
-                                }
-                            }
-                            ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container-xl ">
-
-                <div class="table-responsive">
-                    <div class="table-wrapper">
-                        <div class="table-title">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <h2><b>FYP2 Schedule</b></h2>
+                                                echo '<tr>';
+                                                echo '<td>'.$row['week'].'</td>';
+                                                echo '<td>'.$row['task'].'</td>';
+                                                echo '</tr>';
+                                            }
+                                        }
+                                        ?>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>Week</th>
-                                <th>Task</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            $sql = "SELECT * FROM `sys_dev_schedule` WHERE fyp_type = 'fyp2'";
-
-                            $result = $conn ->query($sql);
-                            if (!empty($result) && $result->num_rows > 0) {
-                                for ($i = 0; $i < mysqli_num_rows($result); $i++){
-                                    $row  = mysqli_fetch_assoc($result);
-
-                                    $id = $row['id'];
-                                    $fyp_type = $row['fyp_type'];
-
-                                    echo '<tr>';
-                                    echo '<td>'.$row['week'].'</td>';
-                                    echo '<td>'.$row['task'].'</td>';
-                                    echo '</tr>';
-                                }
-                            }
-                            ?>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
-
             </div>
         </main>
     </div>

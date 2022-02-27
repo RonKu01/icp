@@ -93,6 +93,7 @@ if(!isset($_SESSION['unique_id'])){
                                     echo '<td>'.$row['position'].'</td>';
                                     echo '<td>'.$row['major'].'</td>';
                                     echo '<td>'.$row['research'].'</td>';
+                                    echo '<td></td>';
                                     echo '</tr>';
                                 }
                             }
