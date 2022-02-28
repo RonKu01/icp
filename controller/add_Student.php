@@ -33,16 +33,7 @@
                   $insert_query3 = mysqli_query($conn,"INSERT INTO progress (student_unique_id, lecturer_unique_id, progress_stage, proposal_due, final_due)
                   VALUES ('{$ran_id}', 0, 'not_set', 'NULL', 'NULL')");
 
-                  if($insert_query3){
-                      $sql = mysqli_query($conn, "SELECT * FROM student WHERE unique_id = '{$ran_id}'");
-
-                      if(mysqli_num_rows($sql) > 0){
-                          $result = mysqli_fetch_assoc($sql);
-                          echo "success";
-                      }else{
-                          echo "This unique ID is not Exist!";
-                      }
-                  }
+                  echo "success";
                 }else{
                     echo "Something went wrong. Please try again!";
                 }
