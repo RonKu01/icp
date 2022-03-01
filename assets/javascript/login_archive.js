@@ -14,9 +14,9 @@ signInBtn.onclick = ()=>{
             if(xhr.status === 200){
                 let data = xhr.response;
                 if(data === "Student"){
-                    window.open("../view/archive_Student.php", "_blank");
+                    location.href="archive_Student.php";
                 }else if(data === "Lecturer") {
-                    window.open("../view/archive_Lecturer.php", "_blank");
+                    location.href="archive_Lecturer.php";
                 }else{
                     errorText.style.display = "block";
                     errorText.textContent = data;

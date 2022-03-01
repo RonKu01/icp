@@ -1,5 +1,5 @@
-const form = document.querySelector("body > div > div > form"),
-    continueBtn = document.querySelector("body > div > div > form > button");
+const form = document.querySelector("#upload_form"),
+    continueBtn = document.querySelector("#btnSubmit");
 
 form.onsubmit = (e)=>{
     e.preventDefault();
@@ -12,13 +12,12 @@ continueBtn.onclick = ()=>{
         if(xhr.readyState === XMLHttpRequest.DONE){
             if(xhr.status === 200){
                 let data = xhr.response;
-                if(data === "success"){
+                if(data === "Successfully Uploaded!"){
                     alert(data);
-                    // location.href="users.php";
-                }else{
+                    location.href="archive_Student.php";
+                } else if (data === "Successfully Resubmitted!"){
                     alert(data);
-                    errorText.style.display = "block";
-                    errorText.textContent = data;
+                    location.href="archive_Student.php";
                 }
             }
         }
