@@ -62,6 +62,7 @@ if(!isset($_SESSION['unique_id'])){
                                         <tr>
                                             <th>Week</th>
                                             <th>Task</th>
+                                            <th></th>
                                             <th>Remarks</th>
                                         </tr>
                                         </thead>
@@ -76,11 +77,22 @@ if(!isset($_SESSION['unique_id'])){
 
                                                 $id = $row['id'];
                                                 $fyp_type = $row['fyp_type'];
+                                                $remark = $row['remark'];
 
                                                 echo '<tr>';
                                                 echo '<td>'.$row['week'].'</td>';
                                                 echo '<td>'.$row['task'].'</td>';
+
+                                                if($remark == 'Submission'){
+
+                                                    echo '<td><span class="badge rounded-pill bg-warning text-dark">Submission</span></td>';
+                                                }else{
+                                                    echo '<td><span class="badge rounded-pill bg-info text-dark">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Info&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>';
+                                                }
+
                                                 echo '<td>'.$row['remark'].'</td>';
+
+
                                                 echo '</tr>';
                                             }
                                         }
@@ -105,6 +117,7 @@ if(!isset($_SESSION['unique_id'])){
                                         <tr>
                                             <th>Week</th>
                                             <th>Task</th>
+                                            <th></th>
                                             <th>Remarks</th>
                                         </tr>
                                         </thead>
@@ -119,10 +132,19 @@ if(!isset($_SESSION['unique_id'])){
 
                                                 $id = $row['id'];
                                                 $fyp_type = $row['fyp_type'];
+                                                $remark = $row['remark'];
 
                                                 echo '<tr>';
                                                 echo '<td>'.$row['week'].'</td>';
                                                 echo '<td>'.$row['task'].'</td>';
+
+                                                if($remark == 'Submission'){
+
+                                                    echo '<td><span class="badge rounded-pill bg-warning text-dark">Submission</span></td>';
+                                                }else{
+                                                    echo '<td><span class="badge rounded-pill bg-info text-dark">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Info&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>';
+                                                }
+
                                                 echo '<td>'.$row['remark'].'</td>';
                                                 echo '</tr>';
                                             }

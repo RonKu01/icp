@@ -75,6 +75,7 @@ if(!isset($_SESSION['unique_id'])){
                             <tr>
                                 <th>Week</th>
                                 <th>Task</th>
+                                <th></th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -89,10 +90,19 @@ if(!isset($_SESSION['unique_id'])){
 
                                     $id = $row['id'];
                                     $fyp_type = $row['fyp_type'];
+                                    $remark = $row['remark'];
 
                                     echo '<tr>';
                                     echo '<td>'.$row['week'].'</td>';
                                     echo '<td>'.$row['task'].'</td>';
+
+                                    if($remark == 'Submission'){
+
+                                        echo '<td><span class="badge rounded-pill bg-warning text-dark">Submission</span></td>';
+                                    }else{
+                                        echo '<td><span class="badge rounded-pill bg-info text-dark">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Info&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>';
+                                    }
+
                                     echo '<td>
                                      <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$id.'`,`'.$fyp_type.'`,`'.$row['week'].'`,`'.$row['task'].'`,`'.$row['remark'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                      <a href="#deleteEmployeeModal" onclick="return getDataForDlt(`'.$id.'`)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
