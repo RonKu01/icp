@@ -94,7 +94,7 @@ if(!isset($_SESSION['unique_id'])){
                                     echo '<td>'.$row['week'].'</td>';
                                     echo '<td>'.$row['task'].'</td>';
                                     echo '<td>
-                                     <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$id.'`,`'.$fyp_type.'`,`'.$row['week'].'`,`'.$row['task'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                     <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$id.'`,`'.$fyp_type.'`,`'.$row['week'].'`,`'.$row['task'].'`,`'.$row['remark'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                      <a href="#deleteEmployeeModal" onclick="return getDataForDlt(`'.$id.'`)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                  </td>';
                                     echo '</tr>';
@@ -114,6 +114,8 @@ if(!isset($_SESSION['unique_id'])){
                     <div class="modal-content">
                         <form class="was-validated" action="#" method="POST" enctype="multipart/form-data" autocomplete="off" novalidate>
                             <input id="fyp_type" name="fyp_type" type="hidden" class="form-control" value="fyp2">
+                            <input id="add_remark_submission" name="add_remark_submission" type="hidden" value="">
+
                             <div class="modal-header">
                                 <h4 class="modal-title">Add Schedule</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -131,6 +133,13 @@ if(!isset($_SESSION['unique_id'])){
                                     <textarea id="task" name="task" rows="5" class="form-control"></textarea>
                                 </div>
                                 <div class="p-1"><!--extra Spacing--></div>
+
+                                <div class="form-group">
+                                    <input type="checkbox" id="add_remark" />
+                                    <label for="add_remark"> Submission</label><br>
+                                </div>
+                                <div class="p-1"><!--extra Spacing--></div>
+
                             </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -208,13 +217,28 @@ if(!isset($_SESSION['unique_id'])){
         var url = window.location.pathname;
         var filename = url.substring(url.lastIndexOf('/')+1);
         $('a[href$="' + filename + '"]').addClass('active');
+
+
+        // Checkbox
+        $('#add_remark').click(function(){
+            if($(this).prop("checked") == true){
+                document.getElementById("add_remark_submission").value = "Submission";
+                console.log("Checkbox is checked.");
+
+            }
+            else if($(this).prop("checked") == false){
+                console.log("Checkbox is unchecked.");
+                document.getElementById('add_remark_submission').value = '';
+            }
+        });
     });
 </script>
 
 <script>
-    function getDataForEdit(id, fyp_type, week, task){
+    function getDataForEdit(id, fyp_type, week, task, remark){
         return document.getElementById('edit-schedule-modal-body').innerHTML =
             '<input id="id" name="id" type="hidden" class="form-control" value="'+ id +'"> ' +
+            '<input id="edit_remark_submission" name="edit_remark_submission" type="hidden" value=""> ' +
 
             '<div class="form-group">' +
             '<label for="week">Week</label> ' +
@@ -225,6 +249,12 @@ if(!isset($_SESSION['unique_id'])){
             '<div class="form-group">' +
             '<label for="task">Email</label>' +
             '<textarea id="task" name="task" rows="5" class="form-control">' + task + '</textarea> ' +
+            '</div>' +
+            '<div class="p-1"><!--extra Spacing--></div>' +
+
+            '<div class="form-group">' +
+            '<input id="edit_remark" type="checkbox" onclick="edit_checkBox()" /> ' +
+            '<label for="edit_remark">Submission</label>' +
             '</div>' +
             '<div class="p-1"><!--extra Spacing--></div>';
     }
@@ -239,6 +269,15 @@ if(!isset($_SESSION['unique_id'])){
             '<p class="text-warning">' +
             '<small>This action cannot be undone.</small>' +
             '</p>';
+    }
+
+    function edit_checkBox(){
+        var checkBox = document.getElementById("edit_remark");
+        if (checkBox.checked == true){
+            document.getElementById("edit_remark_submission").value = "Submission";
+        } else {
+            document.getElementById('edit_remark_submission').value = '';
+        }
     }
 </script>
 
