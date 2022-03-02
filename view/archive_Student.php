@@ -13,6 +13,18 @@
 ?>
 
 <?php include_once "header.php"; ?>
+<style>
+    #error-text{
+        color: black;
+        padding: 8px 10px;
+        text-align: center;
+        border-radius: 5px;
+        background: #f8d7da;
+        border: 1px solid #f5c6cb;
+        margin-bottom: 10px;
+        display: none;
+    }
+</style>
 <body>
   <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
       <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Archive System</a>
@@ -33,6 +45,7 @@
                   <div id="msg_banner"></div>
                   <h4 class="mb-3">Upload FYP File</h4>
                   <form class="needs-validation" id="upload_form" action="#" method="post" enctype="multipart/form-data"  autocomplete="off" novalidate>
+                      <div id="error-text"></div>
                       <div class="row g-2">
                           <div class="col-sm-6">
                               <label for="student_unique_id" class="form-label">Student Unique ID</label>

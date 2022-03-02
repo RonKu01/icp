@@ -1,5 +1,6 @@
 const form = document.querySelector("#upload_form"),
-    continueBtn = document.querySelector("#btnSubmit");
+continueBtn = document.querySelector("#btnSubmit"),
+errorText2 = document.querySelector("#error-text");
 
 form.onsubmit = (e)=>{
     e.preventDefault();
@@ -18,6 +19,9 @@ continueBtn.onclick = ()=>{
                 } else if (data === "Successfully Resubmitted!"){
                     alert(data);
                     location.href="archive_Student.php";
+                } else {
+                    errorText2.style.display = "block";
+                    errorText2.textContent = data;
                 }
             }
         }

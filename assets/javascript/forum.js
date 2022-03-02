@@ -1,4 +1,4 @@
-var myVar = setInterval(LoadData, 3000);
+var myVar = setInterval(LoadData, 500);
 
 http_request = new XMLHttpRequest();
 

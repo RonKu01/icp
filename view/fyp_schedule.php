@@ -62,7 +62,6 @@ if(!isset($_SESSION['unique_id'])){
                                         <tr>
                                             <th>Week</th>
                                             <th>Task</th>
-                                            <th></th>
                                             <th>Remarks</th>
                                         </tr>
                                         </thead>
@@ -89,10 +88,6 @@ if(!isset($_SESSION['unique_id'])){
                                                 }else{
                                                     echo '<td><span class="badge rounded-pill bg-info text-dark">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Info&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>';
                                                 }
-
-                                                echo '<td>'.$row['remark'].'</td>';
-
-
                                                 echo '</tr>';
                                             }
                                         }
@@ -117,7 +112,6 @@ if(!isset($_SESSION['unique_id'])){
                                         <tr>
                                             <th>Week</th>
                                             <th>Task</th>
-                                            <th></th>
                                             <th>Remarks</th>
                                         </tr>
                                         </thead>
@@ -145,7 +139,6 @@ if(!isset($_SESSION['unique_id'])){
                                                     echo '<td><span class="badge rounded-pill bg-info text-dark">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Info&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>';
                                                 }
 
-                                                echo '<td>'.$row['remark'].'</td>';
                                                 echo '</tr>';
                                             }
                                         }
