@@ -6,12 +6,19 @@ if(!isset($_SESSION['unique_id'])){
     header("location: login.php");
 }
 
+
 if(!isset($_GET['student_unique_id'])){
     header("location: list_supervisee.php");
 } else {
     $studentid = $_GET['student_unique_id'];
 }
 
+$select_query = "Select * FROM `grade` WHERE `student_unique_id` = '".$studentid."'";
+$result10 = $conn ->query($select_query);
+if (!empty($result10) && $result10->num_rows > 0) {
+    echo '<script>alert("This student\'s FYP project had been evaluated!")</script>';
+    echo '<script>location.href = "summary_grade.php?student_unique_id='.$studentid.'"</script>';
+}
 ?>
 
 <?php include_once "header.php"; ?>
@@ -217,7 +224,7 @@ if(!isset($_GET['student_unique_id'])){
                                     </tr>
                                     <tr>
                                         <td>Marks</td>
-                                        <td colspan="4"><input class="form-control" name="pro_stmt" type="number"/></td>
+                                        <td colspan="4"><input class="form-control" name="pro_stmt" type="number" min="0" max="20" /></td>
                                         <td></td>
                                     </tr>
                                     <tr>
@@ -289,7 +296,7 @@ if(!isset($_GET['student_unique_id'])){
                                     </tr>
                                     <tr>
                                         <td>Marks</td>
-                                        <td colspan="4"><input class="form-control" name="lit_review" type="number"/></td>
+                                        <td colspan="4"><input class="form-control" name="lit_review" type="number" min="0" max="20" /></td>
                                         <td></td>
                                     </tr>
                                     <tr>
@@ -357,7 +364,7 @@ if(!isset($_GET['student_unique_id'])){
                                     </tr>
                                     <tr>
                                         <td>Marks</td>
-                                        <td colspan="4"><input class="form-control" name="analysis_design" type="number"/></td>
+                                        <td colspan="4"><input class="form-control" name="analysis_design" type="number" min="0" max="20"  /></td>
                                         <td></td>
                                     </tr>
                                     <tr>
@@ -451,7 +458,7 @@ if(!isset($_GET['student_unique_id'])){
                                     </tr>
                                     <tr>
                                         <td>Marks</td>
-                                        <td colspan="4"><input class="form-control" name="imple_test" type="number"/></td>
+                                        <td colspan="4"><input class="form-control" name="imple_test" type="number" min="0" max="20" /></td>
                                         <td></td>
                                     </tr>
                                     <tr>
@@ -513,7 +520,7 @@ if(!isset($_GET['student_unique_id'])){
                                     </tr>
                                     <tr>
                                         <td>Marks</td>
-                                        <td colspan="4"><input class="form-control" name="pro_mange" type="number"/></td>
+                                        <td colspan="4"><input class="form-control" name="pro_mange" type="number" min="0" max="20" /></td>
                                         <td></td>
                                     </tr>
                                     <tr>
@@ -601,7 +608,7 @@ if(!isset($_GET['student_unique_id'])){
                                     </tr>
                                     <tr>
                                         <td>Marks</td>
-                                        <td colspan="4"><input class="form-control" name="conclusion" type="number"/></td>
+                                        <td colspan="4"><input class="form-control" name="conclusion" type="number" min="0" max="20" /></td>
                                         <td></td>
                                     </tr>
                                     <tr>
@@ -703,7 +710,7 @@ if(!isset($_GET['student_unique_id'])){
                                     </tr>
                                     <tr>
                                         <td>Marks</td>
-                                        <td colspan="4"><input class="form-control" name="doc_viva" type="number"/></td>
+                                        <td colspan="4"><input class="form-control" name="doc_viva" type="number" min="0" max="20" /></td>
                                         <td></td>
                                     </tr>
                                     <tr>
