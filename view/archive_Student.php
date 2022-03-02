@@ -1,23 +1,19 @@
 <?php
-session_start();
-require_once "../controller/config.php";
+    session_start();
+    require_once "../controller/config.php";
 
-if(!isset($_SESSION['unique_id'])){
-    header("location: login.php");
-}
+    if(!isset($_SESSION['unique_id'])){
+        header("location: login.php");
+    }
 
-$select_query = mysqli_query($conn, "SELECT * FROM student WHERE student.unique_id = '".$_SESSION['unique_id']."';");
-if(mysqli_num_rows($select_query) > 0){
-    $result = mysqli_fetch_assoc($select_query);
-
-}
-
+    $select_query = mysqli_query($conn, "SELECT * FROM student WHERE student.unique_id = '".$_SESSION['unique_id']."';");
+    if(mysqli_num_rows($select_query) > 0){
+        $result = mysqli_fetch_assoc($select_query);
+    }
 ?>
 
 <?php include_once "header.php"; ?>
-  <body>
-
-
+<body>
   <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
       <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Archive System</a>
       <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +26,7 @@ if(mysqli_num_rows($select_query) > 0){
           </div>
       </div>
   </header>
-  <div class="py-5 px-3 mt-5 me-5">
+  <div class="py-5 px-3 mt-3 me-5">
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
           <div class="container-xl">
               <div class=" col-lg-6">
@@ -111,5 +107,5 @@ if(mysqli_num_rows($select_query) > 0){
       </main>
   </div>
 
-    <script src="../assets/javascript/uploadFile.js"></script>
-  </body>
+  <script src="../assets/javascript/uploadFile.js"></script>
+</body>
