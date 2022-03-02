@@ -132,7 +132,7 @@ if(!isset($_GET['student_unique_id'])){
                             <div class="table-title">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <h5>Grading</h5>
+                                        <h5>Summary Grading</h5>
                                     </div>
                                 </div>
                             </div>

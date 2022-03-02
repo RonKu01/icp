@@ -21,10 +21,10 @@ if(isset($_FILES['file'])) {
 
                 $select_sql = mysqli_query($conn, "SELECT * FROM submission_archive WHERE student_unique_id= '{$student_unique_id}'");
                 if(mysqli_num_rows($select_sql) > 0) {
-                    $update_query = mysqli_query($conn, "UPDATE submission_archive SET `filesName` = '{$img_name}', `status` = 'pending' WHERE student_unique_id = {$student_unique_id} ");
+                    $update_query = mysqli_query($conn, "UPDATE submission_archive SET `filesName` = '{$img_name}', `status` = 'Pending' WHERE student_unique_id = {$student_unique_id} ");
                     echo "Successfully Resubmitted!";
                 } else {
-                    $insert_query = mysqli_query($conn, "INSERT INTO submission_archive (student_unique_id, filesName, status) VALUES ('{$student_unique_id}', '{$img_name}', 'pending')");
+                    $insert_query = mysqli_query($conn, "INSERT INTO submission_archive (student_unique_id, filesName, status) VALUES ('{$student_unique_id}', '{$img_name}', 'Pending')");
                     if($insert_query){
                         echo "Successfully Uploaded!";
 

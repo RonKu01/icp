@@ -69,6 +69,7 @@ if(!isset($_SESSION['unique_id'])){
                             <thead>
                             <tr>
                                 <th>Name</th>
+                                <th></th>
                                 <th>Email</th>
                                 <th>Position</th>
                                 <th>Major</th>
@@ -89,6 +90,7 @@ if(!isset($_SESSION['unique_id'])){
 
                                     echo '<tr>';
                                     echo '<td>'.$row['name'].'</td>';
+                                    echo '<td></td>';
                                     echo '<td>'.$row['email'].'</td>';
                                     echo '<td>'.$row['position'].'</td>';
                                     echo '<td>'.$row['major'].'</td>';

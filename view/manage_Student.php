@@ -114,9 +114,12 @@ if(!isset($_SESSION['unique_id'])){
                                             }
                                             echo '<td>'.$row2['name'].'</td>';
                                         }
+
+
                                         if($row['second_marker_unique_id'] == 0 || $row['second_marker_unique_id'] == NULL){
                                             echo '<td>not_set</td>';
                                         }else{
+
                                             $sql3 = "SELECT * FROM `lecturer` WHERE lecturer.unique_id = '{$row['second_marker_unique_id']}'";
 
                                             $result3 = $conn ->query($sql3);

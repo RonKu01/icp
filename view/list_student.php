@@ -68,6 +68,7 @@ if(!isset($_SESSION['unique_id'])){
                         <table class="table table-striped table-hover">
                             <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Programme</th>
@@ -90,6 +91,7 @@ if(!isset($_SESSION['unique_id'])){
                                         $unique_id = $row['unique_id'];
 
                                         echo '<tr>';
+                                        echo '<td>'.$row['unique_id'].'</td>';
                                         echo '<td>'.$row['name'].'</td>';
                                         echo '<td>'.$row['email'].'</td>';
                                         echo '<td>'.$row['programme'].'</td>';

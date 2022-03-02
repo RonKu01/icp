@@ -5,11 +5,6 @@
     if(!isset($_SESSION['unique_id'])){
         header("location: login.php");
     }
-
-    $select_query = mysqli_query($conn, "SELECT * FROM student WHERE student.unique_id = '".$_SESSION['unique_id']."';");
-    if(mysqli_num_rows($select_query) > 0){
-        $result = mysqli_fetch_assoc($select_query);
-    }
 ?>
 
 <?php include_once "header.php"; ?>
@@ -29,39 +24,12 @@
     <div class="py-5 px-3 mt-5 me-5">
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="container-xl">
-          <div class=" col-lg-6">
-              <div id="msg_banner"></div>
-              <h4 class="mb-3">Upload FYP File</h4>
-              <form class="needs-validation" id="upload_form" action="#" method="post" enctype="multipart/form-data"  autocomplete="off" novalidate>
-                  <div class="row g-2">
-                      <div class="col-sm-6">
-                          <label for="student_unique_id" class="form-label">Student Unique ID</label>
-                          <input type="text" class="form-control" id="student_unique_id" name="student_unique_id" value="<?php echo $_SESSION['unique_id']?>" readonly>
-                      </div>
-
-                      <div class="col-sm-6">
-                          <label for="student_name" class="form-label">Student Name</label>
-                          <input type="text" class="form-control" id="student_name" name="student_name" value="<?php echo $result['name']?>" readonly>
-                      </div>
-
-                      <div class="col-sm-12">
-                          <label for="name" class="form-label">Files</label>
-                          <input type="file" name="file" class="form-control" required>
-                      </div>
-                  </div>
-                  <br/>
-                  <button class="w-100 btn btn-primary btn-lg" id="btnSubmit" type="submit" name="submit">Upload / Resubmit</button>
-              </form>
-              <hr class="my-4">
-          </div>
-
-
           <div class="table-responsive me-5">
               <div class="table-wrapper">
                   <div class="table-title">
                       <div class="row">
                           <div class="col-sm-6">
-                              <h2><b>Previous Submission</b></h2>
+                              <h2><b>Archive System</b></h2>
                           </div>
                       </div>
                   </div>
@@ -73,11 +41,12 @@
                           <th>Files</th>
                           <th>Archive Status</th>
                           <th></th>
+                          <th>Action</th>
                       </tr>
                       </thead>
                       <tbody>
                       <?php
-                      $sql = "SELECT * FROM submission_archive INNER JOIN student ON submission_archive.student_unique_id = student.unique_id WHERE student.unique_id = '{$_SESSION['unique_id']}'";
+                      $sql = "SELECT * FROM submission_archive INNER JOIN student ON submission_archive.student_unique_id = student.unique_id WHERE student.supervisor_unique_id = '{$_SESSION['unique_id']}'";
 
                       $result = $conn ->query($sql);
                       if (!empty($result) && $result->num_rows > 0) {
@@ -94,6 +63,7 @@
                               echo '<td>'.$filesName.'</td>';
                               echo '<td>'.$status.'</td>';
                               echo '<td></td>';
+                              echo '<td><a href="../assets/fyp/'.$filesName.'" target="_blank"><i class="material-icons" style="font-size: 20px;"  title="View FYP">article</i></a></td>';
                               echo '</tr>';
                           }
                       }

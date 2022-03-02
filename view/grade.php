@@ -87,6 +87,7 @@ if(!isset($_GET['student_unique_id'])){
                             $year = $row['year'];
                             $fyp_title = $row['fyp_title'];
                             $supervisor_id = $row['supervisor_unique_id'];
+                            $second_Marker_id = $row['second_marker_unique_id'];
                         }
                     ?>
 
@@ -132,10 +133,24 @@ if(!isset($_GET['student_unique_id'])){
                                     $result2 = $conn -> query($sql2);
                                     for ($i = 0; $i < mysqli_num_rows($result2); $i++) {
                                         $row2 = mysqli_fetch_assoc($result2);
-
                                         $supervisor_name = $row2['name'];
                                     }
+
+                                    if($row['second_marker_unique_id'] == 0 || $row['second_marker_unique_id'] == NULL){
+                                        echo '<td>not_set</td>';
+                                    }else{
+
+                                        $sql3 = "SELECT * FROM `lecturer` WHERE lecturer.unique_id = '{$row['second_marker_unique_id']}'";
+
+                                        $result3 = $conn ->query($sql3);
+                                        if (!empty($result3) && $result3->num_rows > 0) {
+                                            $row3  = mysqli_fetch_assoc($result3);
+                                            $second_Marker_name = $row3['name'];
+                                        }
+                                    }
+
                                     ?>
+
                                     <div class="col-12">
                                         <label for="supervisor_name" class="form-label">Supervisor Name</label>
                                         <input type="text" class="form-control" id="supervisor_name" name="supervisor_name" value="<?php echo $supervisor_name?>" readonly>
@@ -143,7 +158,7 @@ if(!isset($_GET['student_unique_id'])){
 
                                     <div class="col-12">
                                         <label for="second_marker" class="form-label">Second Marker</label>
-                                        <input type="text" class="form-control" id="second_marker" name="second_marker" value="" readonly>
+                                        <input type="text" class="form-control" id="second_marker" name="second_marker" value="<?php echo $second_Marker_name?>" readonly>
                                     </div>
                                 </div>
 

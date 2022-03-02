@@ -69,10 +69,13 @@ if(!isset($_SESSION['unique_id'])){
                             <table class="table table-striped table-hover">
                                 <thead>
                                 <tr>
+                                    <th>Student ID</th>
                                     <th>Name</th>
-                                    <th>Logbook Comments</th>
                                     <th>Meeting Date</th>
-                                    <th>Action</th>
+                                    <th>Schedule Meeting</th>
+                                    <th>Logbook Review</th>
+                                    <th>FYP Project</th>
+                                    <th>Grade</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -93,23 +96,42 @@ if(!isset($_SESSION['unique_id'])){
                                         $resul3 = $conn ->query($sql3);
                                         $row3 = mysqli_fetch_assoc($resul3);
 
-                                        $msg = $row3['start_event'] ?? 'No meeting schedule.';
+                                        $meeting = $row3['start_event'] ?? 'No meeting schedule.';
+                                        $comment = $row2['comment'] ?? 'Not Set';
+
+                                        $select_sql = "SELECT filesName FROM submission_archive INNER JOIN student ON submission_archive.student_unique_id = student.unique_id WHERE student.unique_id = '{$unique_id}'";
+
+                                        $result = $conn ->query($select_sql);
+                                        if (!empty($result) && $result->num_rows > 0) {
+                                            for ($i = 0; $i < mysqli_num_rows($result); $i++) {
+                                                $row4 = mysqli_fetch_assoc($result);
+                                            }
+                                        }
+
+                                        $filesName = $row4['filesName'] ?? 'Not Submitted yet';
 
                                         echo '<tr>';
+                                        echo '<td>'.$row['unique_id'].'</td>';
                                         echo '<td>'.$row['name'].'</td>';
-                                        echo '<td>'.$row2['comment'].'</td>';
-                                        echo '<td>'.$msg.'</td>';
+                                        echo '<td>'.$meeting.'</td>';
+                                        echo '<td> <a href="schedule_meeting.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Schedule Meeting">&#xe850;</i></a></td>';
+                                        echo '<td><a href="lec_view_logbook.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Logbook">&#xe850;</i></a></td>';
+
+                                        if ($filesName == 'Not Submitted yet'){
+                                            echo '<td>Not Submitted yet</td>';
+                                        } else {
+                                            echo '<td><a href="../assets/fyp/'.$filesName.'" target="_blank" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="FYP">&#xe850;</i></a></td>';
+                                        }
+
                                         echo '<td>
-                                              <a href="lec_view_logbook.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Logbook">&#xe850;</i></a>
-                                              <a href="schedule_meeting.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Schedule Meeting">&#xe850;</i></a>
-                                              <a href="grade.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Grade">&#xe850;</i></a>
-                                               <a href="summary_grade.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Grade">&#xe850;</i></a>
-                                          </td>';
+                                               <a href="grade.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Grade">&#xe850;</i></a>
+                                               <a href="summary_grade.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Summary Grade">&#xe850;</i></a></td>';
                                         echo '</tr>';
                                     }
                                 }
                                 mysqli_free_result($result);
                                 ?>
+
                                 </tbody>
                             </table>
                         </div>
@@ -126,8 +148,11 @@ if(!isset($_SESSION['unique_id'])){
                             <table class="table table-striped table-hover">
                                 <thead>
                                 <tr>
+                                    <th>Student ID</th>
                                     <th>Name</th>
+                                    <th></th>
                                     <th>Comment</th>
+                                    <th>FYP Project</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -141,7 +166,9 @@ if(!isset($_SESSION['unique_id'])){
                                             $unique_id = $row['unique_id'];
 
                                             echo '<tr>';
+                                            echo '<td>'.$row['unique_id'].'</td>';
                                             echo '<td>'.$row['name'].'</td>';
+                                            echo '<td></td>';
 
                                             $sql2 = "SELECT sec_marker_comment FROM grade WHERE student_unique_id = {$unique_id}";
                                             $result2 = $conn ->query($sql2);
@@ -149,14 +176,26 @@ if(!isset($_SESSION['unique_id'])){
                                                 $row2 = mysqli_fetch_assoc($result2);
                                             }
 
-                                            if($row2['sec_marker_comment'] == 0 || $row2['sec_marker_comment'] == NULL){
-                                                echo '<td>not_set</td>';
-                                            }else{
-                                                echo '<td>'.$sec_marker_comment = $row2['sec_marker_comment'].'</td>';
+                                            $select_sql = "SELECT filesName FROM submission_archive INNER JOIN student ON submission_archive.student_unique_id = student.unique_id WHERE student.unique_id = '{$unique_id}'";
+
+                                            $result3 = $conn ->query($select_sql);
+                                            if (!empty($result3) && $result3->num_rows > 0) {
+                                                for ($i = 0; $i < mysqli_num_rows($result3); $i++) {
+                                                    $row5 = mysqli_fetch_assoc($result3);
+                                                }
+                                            }
+
+                                            $filesName = $row5['filesName'] ?? 'Not Submitted yet';
+                                            $sec_marker_comment = $row2['sec_marker_comment'] ?? 'Not Set';
+                                            echo '<td>'.$sec_marker_comment.'</td>';
+                                            if ($filesName == 'Not Submitted yet'){
+                                                echo '<td>Not Submitted yet</td>';
+                                            } else {
+                                                echo '<td><a href="../assets/fyp/'.$filesName.'" target="_blank" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="FYP">&#xe850;</i></a></td>';
                                             }
 
                                             echo '<td>
-                                                      <a href="second_marker_grade.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Grade">&#xe850;</i></a>
+                                                      <a href="second_marker_grade.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Review">&#xe850;</i></a>
                                                   </td>';
                                             echo '</tr>';
                                         }
