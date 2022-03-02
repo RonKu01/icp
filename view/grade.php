@@ -6,7 +6,6 @@ if(!isset($_SESSION['unique_id'])){
     header("location: login.php");
 }
 
-
 if(!isset($_GET['student_unique_id'])){
     header("location: list_supervisee.php");
 } else {
