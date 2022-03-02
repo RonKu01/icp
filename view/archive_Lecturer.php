@@ -63,7 +63,8 @@
                               echo '<td>'.$filesName.'</td>';
                               echo '<td>'.$status.'</td>';
                               echo '<td></td>';
-                              echo '<td><a href="../assets/fyp/'.$filesName.'" target="_blank"><i class="material-icons" style="font-size: 20px;"  title="View FYP">article</i></a></td>';
+                              echo '<td><a href="../assets/fyp/'.$filesName.'" target="_blank"><i class="material-icons" style="font-size: 20px;"  title="View FYP">article</i></a>';
+                              echo '<a href="#archiveConfirmationModal" onclick="return getDataForArchive(`'.$unique_id.'`)" class="text-info" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Archive">archive</i></a></td>';
                               echo '</tr>';
                           }
                       }
@@ -74,10 +75,44 @@
               </div>
           </div>
       </div>
+
+        <!-- Archive Confirmation Modal HTML -->
+        <div id="archiveConfirmationModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="archive_form">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Archive Student FYP Project</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="error-text" id="error-text"></div>
+                            <div id="archive-FYP-modal-body"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                            <input type="submit" id="btnArchive" class="btn btn-danger" value="Archive">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main>
     </div>
 
-    <script src="../assets/javascript/uploadFile.js"></script>
+    <script src="../assets/javascript/archive.js"></script>
+
+    <script>
+        function getDataForArchive(unique_id){
+            return document.getElementById('archive-FYP-modal-body').innerHTML =
+            '<div class="form-group">' +
+            '<input id="unique_id" name="unique_id" type="hidden" class="form-control" value="'+ unique_id +'" readonly> ' +
+            '</div>' +
+            '<div class="p-1"><!--extra Spacing--></div>' +
+            '<p>Are you sure you want to archive this Student FYP project?</p>'
+        }
+    </script>
+
 </body>
 
 

@@ -29,7 +29,7 @@ if(isset($_FILES['file'])) {
                             $update_query = mysqli_query($conn, "UPDATE submission_archive SET `filesName` = '{$img_name}', `status` = 'Pending' WHERE student_unique_id = {$student_unique_id} ");
                             echo "Successfully Resubmitted!";
                         }else {
-                            echo "The file has been archive! Cannot Edit.";
+                            echo "Failed! The file has been archive! Cannot Edit.";
                         }
 
                     } else {

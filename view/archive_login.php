@@ -9,7 +9,7 @@ if(!isset($_SESSION['unique_id'])){
 
 <?php include_once "header.php"; ?>
 <style>
-    div.error-text{
+    #error-text{
         color: #721c24;
         padding: 8px 10px;
         text-align: center;
@@ -54,30 +54,37 @@ if(!isset($_SESSION['unique_id'])){
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-
                 <div class="py-lg-5 px-3 ">
-                    <div class="container me-5 mt-5">
-                        <h1 class="h2 mb-3 fw-bold">Login - Archive System </h1>
-                        <form class="was-validated" action="#" method="POST" enctype="multipart/form-data" autocomplete="off" novalidate>
-                            <div class="error-text"></div>
-                            <div class="form-floating">
-                                <input type="text" id="userID" class="form-control" name="login_id" placeholder="Enter your userID" required />
-                                <label for="userID">User ID</label>
+                    <div class="row align-items-start">
+                        <div class="col"></div>
+                        <div class="col">
+                            <div class="container border mt-5">
+                                <br>
+                                <h3 class="h3 mb-3 fw-bold">FYP Submission & <br> Archive System </h3>
+                                <form id="archive_login_form" class="was-validated" action="#" method="POST" enctype="multipart/form-data" autocomplete="off" novalidate>
+                                    <div id="error-text"></div>
+                                    <div class="form-floating">
+                                        <input type="text" id="userID" class="form-control" name="login_id" placeholder="Enter your userID" required />
+                                        <label for="userID">User ID</label>
+                                    </div>
+                                    <div class="p-1"><!--extra Spacing--></div>
+                                    <div class="form-floating">
+                                        <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password" required />
+                                        <label for="password">Password</label>
+                                    </div>
+                                    <div class="checkbox mb-4 pt-3">
+                                        <label>
+                                            <input type="checkbox" onclick="showPw()" > Show Password
+                                        </label>
+                                    </div>
+                                    <button id="btnLogin"  class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                                    <p class="mt-2 mb-3 text-muted">&copy; Team Neon 2022</p>
+                                </form>
                             </div>
-                            <div class="p-1"><!--extra Spacing--></div>
-                            <div class="form-floating">
-                                <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password" required />
-                                <label for="password">Password</label>
-                            </div>
-                            <div class="checkbox mb-4 pt-3">
-                                <label>
-                                    <input type="checkbox" onclick="showPw()" > Show Password
-                                </label>
-                            </div>
-                            <button  class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-                            <p class="mt-2 mb-3 text-muted">&copy; Team Neon 2022</p>
-                        </form>
+                        </div>
+                        <div class="col"></div>
                     </div>
+
                 </div>
             </main>
         </div>
@@ -87,6 +94,7 @@ if(!isset($_SESSION['unique_id'])){
     <script src="../assets/javascript/login_archive.js"></script>
     <script src="../assets/javascript/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../assets/javascript/dashboard.js"></script>
+
     <script>
         $(document).ready(function(){
             // NavBar Active

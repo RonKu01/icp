@@ -34,7 +34,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="archive_login.php">
                     <span data-feather="file"></span>
-                    Archive
+                    FYP Submissson / Archive
                 </a>
             </li>
             <li class="nav-item">

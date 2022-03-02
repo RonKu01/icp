@@ -1,6 +1,6 @@
-const form = document.querySelector("body > div > div > main > div > div > form"),
-    signInBtn = document.querySelector("body > div > div > main > div > div > form > button"),
-    errorText = document.querySelector("body > div > div > main > div > div > form > div.error-text");
+const form = document.querySelector("#archive_login_form"),
+    signInBtn = document.querySelector("#btnLogin"),
+    errorText = document.querySelector("#error-text");
 
 form.onsubmit = (e)=>{
     e.preventDefault();
