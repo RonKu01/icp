@@ -12,7 +12,6 @@ if(!isset($_GET['student_unique_id'])){
     $studentid = $_GET['student_unique_id'];
 }
 
-
     $sql = "SELECT * FROM grade WHERE student_unique_id = {$studentid}";
 
     $result = $conn ->query($sql);

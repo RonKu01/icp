@@ -88,24 +88,17 @@ if(!isset($_SESSION['unique_id'])){
                                         $row  = mysqli_fetch_assoc($result);
                                         $unique_id = $row['unique_id'];
 
-                                        $sql2 = "SELECT `comment` FROM logbook WHERE student_unique_id = '{$unique_id}' ORDER BY `id` DESC LIMIT 1;";
-                                        $resul2 = $conn ->query($sql2);
-                                        $row2 = mysqli_fetch_assoc($resul2);
-
                                         $sql3 = "SELECT `start_event` FROM meeting WHERE student_unique_id = '{$unique_id}' ORDER BY `id` DESC LIMIT 1;";
                                         $resul3 = $conn ->query($sql3);
                                         $row3 = mysqli_fetch_assoc($resul3);
 
                                         $meeting = $row3['start_event'] ?? 'No meeting schedule.';
-                                        $comment = $row2['comment'] ?? 'Not Set';
 
                                         $select_sql = "SELECT filesName FROM submission_archive INNER JOIN student ON submission_archive.student_unique_id = student.unique_id WHERE student.unique_id = '{$unique_id}'";
 
-                                        $result = $conn ->query($select_sql);
-                                        if (!empty($result) && $result->num_rows > 0) {
-                                            for ($i = 0; $i < mysqli_num_rows($result); $i++) {
-                                                $row4 = mysqli_fetch_assoc($result);
-                                            }
+                                        $result5 = $conn ->query($select_sql);
+                                        if (!empty($result5) && $result5->num_rows > 0) {
+                                            $row4 = mysqli_fetch_assoc($result5);
                                         }
 
                                         $filesName = $row4['filesName'] ?? 'Not Submitted yet';
@@ -207,33 +200,10 @@ if(!isset($_SESSION['unique_id'])){
                         </div>
                     </div>
                 </div>
-                </div>
-                <!-- Edit Modal HTML -->
-                <div id="editEmployeeModal" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <form>
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Edit Lecturer</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                </div>
-                                <div class="modal-body" >
-                                    <div class="error-text" id="error-text"></div>
-                                    <div id="edit-lecturer-modal-body"></div>
-                                </div>
-                                <div class="modal-footer">
-                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                                    <input type="submit" id="updateBtn" class="btn btn-info" value="Save">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
             </main>
         </div>
     </div>
 
-    <script src="../assets/javascript/update_progress.js"></script>
     <script src="../assets/javascript/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../assets/javascript/dashboard.js"></script>
 
@@ -245,33 +215,6 @@ if(!isset($_SESSION['unique_id'])){
             var filename = url.substring(url.lastIndexOf('/')+1);
             $('a[href$="' + filename + '"]').addClass('active');
         });
-    </script>
-
-    <script>
-        function getDataForEdit(student_unique_id, progress_stage, percent){
-            return document.getElementById('assign-supervisor-modal-body').innerHTML =
-                '<input id="student_unique_id" name="student_unique_id" type="hidden" value="'+ student_unique_id +'"> ' +
-
-                '<div class="form-group">' +
-                '<label for="progress_stage">Progression Stage</label> ' +
-                '<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="progress_stage" required>' +
-                    '<option value="' + progress_stage + '" selected> Current: ' + progress_stage + '</option>' +
-                    '<option value="Planning">Planning</option>' +
-                    '<option value="Analysis">Analysis</option>' +
-                    '<option value="Design">Design</option>' +
-                    '<option value="Implementing">Implementing</option>' +
-                    '<option value="Test">Test</option>' +
-                    '<option value="Completed">Completed</option>' +
-                '</select>' +
-                '</div>' +
-                '<div class="p-1"><!--extra Spacing--></div>' +
-
-                '<div class="form-group">' +
-                '<label for="percent">Percentage</label> ' +
-                '<input id="percent" name="percent" type="number" min="0" max="100" class="form-control" value="'+ percent +'" required> ' +
-                '</div>' +
-                '<div class="p-1"><!--extra Spacing--></div>';
-        }
     </script>
 </body>
 </html>
