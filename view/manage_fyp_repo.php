@@ -53,8 +53,8 @@ if(!isset($_SESSION['unique_id'])){
             require_once "nav_student.php";
         }
         ?>
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="container-xl">
                 <div class="table-responsive">
                     <div class="table-wrapper">
