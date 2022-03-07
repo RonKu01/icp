@@ -1,4 +1,4 @@
-const form = document.querySelector("body > div > div > main > div > div > div > form");
+const form = document.querySelector("body > div > div > main > div > div > div > form"),
 updateBtn = document.querySelector("body > div > div > main > div > div > div > form > button");
 msg_banner = document.querySelector("#msg_banner");
 
@@ -15,8 +15,6 @@ updateBtn.onclick = ()=>{
               let data = xhr.response;
               if(data === "success"){
                 location.href="../view/profile_student.php";
-                  msg_banner.style.display = "block";
-                  msg_banner.textContent = data;
               }else{
                   msg_banner.style.display = "block";
                   msg_banner.textContent = data;

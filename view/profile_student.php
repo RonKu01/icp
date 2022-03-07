@@ -83,37 +83,44 @@ if(!isset($_SESSION['unique_id'])){
 
                             <div class="col-12">
                                 <label for="programme" class="form-label">Programme</label>
-                                <input type="programme" class="form-control" id="programme" name="programme" value="<?php echo $result['programme']?>" readonly>
+                                <input type="text" class="form-control" id="programme" name="programme" value="<?php echo $result['programme']?>" readonly>
                             </div>
 
                             <div class="col-12">
                                 <label for="year" class="form-label">Year</label>
-                                <input type="year" class="form-control" id="year" name="year" value="<?php echo $result['year']?>" readonly>
+                                <input type="text" class="form-control" id="year" name="year" value="<?php echo $result['year']?>" readonly>
                             </div>
 
                             <div class="col-12">
                                 <label for="cgpa" class="form-label">CGPA</label>
-                                <input type="cgpa" class="form-control" id="cgpa" name="cgpa" value="<?php echo $result['cgpa']?>" readonly>
+                                <input type="text" class="form-control" id="cgpa" name="cgpa" value="<?php echo $result['cgpa']?>" readonly>
                             </div>
 
                             <?php
+
+                            $supervisorName = '';
+                            if($result['supervisor_unique_id'] == 0 || $result['supervisor_unique_id'] == NULL){
+                                $supervisorName = 'Not Set';
+                            }else{
                                 $sql2 = "SELECT * FROM `lecturer` WHERE unique_id = '".$result['supervisor_unique_id']."'" ;
                                 $result2 = $conn -> query($sql2);
                                 for ($i = 0; $i < mysqli_num_rows($result2); $i++) {
                                     $row2 = mysqli_fetch_assoc($result2);
                                 }
+                                $supervisorName = $row2['name'];
+                            }
                             ?>
 
                             <div class="col-12">
                                 <label for="supervisor_unique_id" class="form-label">Supervisor Name</label>
-                                <input type="supervisor_unique_id" class="form-control" id="supervisor_unique_id" name="supervisor_unique_id" value="<?php echo $row2['name']?>" readonly>
+                                <input type="text" class="form-control" id="supervisor_unique_id" name="supervisor_unique_id" value="<?php echo $supervisorName ?>" readonly>
                                 <div class="invalid-feedback">
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <label for="phone_num" class="form-label">Phone Number</label>
-                                <input type="phone_num" class="form-control" id="phone_num" name="phone_num" value="<?php echo $result['phone_num']?>" required>
+                                <input type="text" class="form-control" id="phone_num" name="phone_num" value="<?php echo $result['phone_num']?>" required>
                                 <div class="invalid-feedback">
                                     Please enter your Phone Number.
                                 </div>
@@ -121,7 +128,7 @@ if(!isset($_SESSION['unique_id'])){
 
                             <div class="col-12">
                                 <label for="fyp_title" class="form-label">FYP Project Title</label>
-                                <input type="fyp_title" class="form-control" id="fyp_title" name="fyp_title" value="<?php echo $result['fyp_title']?>" required>
+                                <input type="text" class="form-control" id="fyp_title" name="fyp_title" value="<?php echo $result['fyp_title']?>" required>
                                 <div class="invalid-feedback">
                                     Please enter your FYP Project Title.
                                 </div>
