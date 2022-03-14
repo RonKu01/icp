@@ -43,9 +43,14 @@ if(!isset($_SESSION['unique_id'])){
             require_once "nav_lecturer.php";
         ?>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
-
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-3">
+            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active d-flex justify-content-center">
+                        <img src="../assets/images/sup_1.jpg" class="d-block w-75" alt="...">
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </div>
