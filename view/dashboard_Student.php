@@ -45,10 +45,26 @@ if(!isset($_SESSION['unique_id'])){
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="pt-5">
                 <div class="container-xl ">
-<!--                    <h1>Next Meeting</h1>-->
-<!--                    -->
-<!--                    <hr />-->
                     <div class="row align-items-start">
+                        <?php
+                        $sql = "SELECT * FROM `meeting` WHERE student_unique_id = '{$_SESSION['unique_id']}'";
+                        $result = $conn ->query($sql);
+
+                        if (!empty($result) && $result->num_rows > 0) {
+                              $row  = mysqli_fetch_assoc($result);
+                              $student_id = $row['student_unique_id'];
+                              $meeting_date = $row['start_event'];
+
+                        }
+                        mysqli_free_result($result);
+
+                        ?>
+                        <h2>Next Meeting: <?php echo $meeting_date;?></h2>
+
+
+
+                        <hr>
+                        <h1 class="py-1">SUBMISSION DATE</h1>
                         <div class="col">
                             <div class="table-responsive-sm">
                                 <div class="table-wrapper">
