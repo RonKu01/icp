@@ -10,10 +10,9 @@
     $cgpa = mysqli_real_escape_string($conn, $_POST['cgpa']);
     $phone_num = mysqli_real_escape_string($conn, $_POST['phone_num']);
     $fyp_title = mysqli_real_escape_string($conn, $_POST['fyp_title']);
-    $supervisor_unique_id = mysqli_real_escape_string($conn, $_POST['supervisor_unique_id']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-    if(!empty($unique_id) &&!empty($name) && !empty($email) && !empty($programme)  && !empty($year) && !empty($cgpa) && !empty($phone_num) && !empty($fyp_title) && !empty($supervisor_unique_id) && !empty($password)){
+    if(!empty($unique_id) &&!empty($name) && !empty($email) && !empty($programme)  && !empty($year) && !empty($cgpa) && !empty($phone_num) && !empty($fyp_title) && !empty($password)){
 
         $select_query = mysqli_query($conn, "SELECT * FROM userlogin WHERE unique_id = '{$unique_id}'");
 
@@ -24,7 +23,7 @@
                 $enc_pass = md5($password);
                 $update_query1 = mysqli_query($conn, "UPDATE `userlogin` SET `password`='".$enc_pass."' WHERE `unique_id`='".$unique_id."'");
             }
-            $update_query2 = mysqli_query($conn, "UPDATE `student` SET `email`='".$email."',`programme`='".$programme."',`year`='".$year."',`cgpa`='".$cgpa."',`phone_num`='".$phone_num."',`fyp_title`='".$fyp_title."',`supervisor_unique_id`='".$supervisor_unique_id."' WHERE `unique_id`='".$unique_id."'");
+            $update_query2 = mysqli_query($conn, "UPDATE `student` SET `email`='".$email."',`programme`='".$programme."',`year`='".$year."',`cgpa`='".$cgpa."',`phone_num`='".$phone_num."',`fyp_title`='".$fyp_title."' WHERE `unique_id`='".$unique_id."'");
 
             echo "success";
 

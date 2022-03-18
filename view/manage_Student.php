@@ -130,13 +130,12 @@ if(!isset($_SESSION['unique_id'])){
                                         }
                                         echo '<td>
                                                 <a href="#assignSupervisorModal" class="edit" onclick="return assignSupervisor(`'.$row['unique_id'].'`)" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Assign">&#xE872;</i></a>
-                                                 <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$row['unique_id'].'`,`'.$row['name'].'`,`'.$row['email'].'`,`'.$row['programme'].'`,`'.$row['year'].'`,`'.$row['cgpa'].'`,`'.$row['phone_num'].'`,`'.$row['fyp_title'].'`,`'.$row['supervisor_unique_id'].'`,`'.$row['password'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                                 <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$row['unique_id'].'`,`'.$row['name'].'`,`'.$row['email'].'`,`'.$row['programme'].'`,`'.$row['year'].'`,`'.$row['cgpa'].'`,`'.$row['phone_num'].'`,`'.$row['fyp_title'].'`, `'.$row['password'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                                  <a href="#deleteEmployeeModal" onclick="return getDataForDlt(`'.$row['unique_id'].'`)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                               </td>';
                                         echo '</tr>';
                                     }
                                 }
-
                                 ?>
                             </tbody>
                         </table>
