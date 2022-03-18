@@ -322,119 +322,119 @@ if(!isset($_SESSION['unique_id'])){
 
 <script>
 
-    function getDataForEdit(unique_id, name, email, programme, year, cgpa, phone_num, fyp_title, supervisor_unique_id, password){
-        return document.getElementById('edit-Student-modal-body').innerHTML =
-        '<div class="form-group">' +
-        '<label for="unique_id">UniqueID</label> ' +
-        '<input id="unique_id" name="unique_id" type="text" class="form-control" value="'+ unique_id +'" readonly> ' +
-        '</div>' +
-        '<div class="p-1"><!--extra Spacing--></div>' +
-
-        '<div class="form-group">' +
-        '<label for="name">Name</label> ' +
-        '<input id="name" name="name" type="text" class="form-control" value="'+ name +'" readonly> ' +
-        '</div>' +
-        '<div class="p-1"><!--extra Spacing--></div>' +
-
-        '<div class="form-group">' +
-        '<label for="email">Email</label> ' +
-        '<input id="email" name="email" type="email" class="form-control" value="'+ email +'" required> ' +
-        '</div>' +
-        '<div class="p-1"><!--extra Spacing--></div>' +
-
-        '<div class="form-group">' +
-        '<label for="programme">Programme</label> ' +
-        '<input id="programme" name="programme" type="text" class="form-control" value="'+ programme +'" required> ' +
-        '</div>' +
-        '<div class="p-1"><!--extra Spacing--></div>' +
-
-        '<div class="form-group">' +
-        '<label for="year">Year</label> ' +
-        '<input id="year" name="year" type="text" class="form-control" value="'+ year +'" required> ' +
-        '</div>' +
-        '<div class="p-1"><!--extra Spacing--></div>' +
-
-        '<div class="form-group">' +
-        '<label for="cgpa">CGPA</label> ' +
-        '<input id="cgpa" name="cgpa" type="text" class="form-control" value="'+ cgpa +'" required> ' +
-        '</div>' +
-        '<div class="p-1"><!--extra Spacing--></div>' +
-
-        '<div class="form-group">' +
-        '<label for="phone_num">Phone Number</label> ' +
-        '<input id="phone_num" name="phone_num" type="text" class="form-control" value="'+ phone_num +'" required> ' +
-        '</div>' +
-        '<div class="p-1"><!--extra Spacing--></div>' +
-
-        '<div class="form-group">' +
-        '<label for="fyp_title">FYP Project Title</label> ' +
-        '<input id="fyp_title" name="fyp_title" type="text" class="form-control" value="'+ fyp_title +'" required> ' +
-        '</div>' +
-        '<div class="p-1"><!--extra Spacing--></div>' +
-
-        '<div class="form-group">' +
-        '<label for="password">Password</label> ' +
-        '<input id="password" name="password" type="password" class="form-control" value="'+ password +'" required> ' +
-        '</div>' +
-        '<div class="p-1"><!--extra Spacing--></div>' ;
-
-    }
-
-    function getDataForDlt(unique_id){
-        return document.getElementById('delete-Student-modal-body').innerHTML =
+        function getDataForEdit(unique_id, name, email, programme, year, cgpa, phone_num, fyp_title, supervisor_unique_id, password){
+            return document.getElementById('edit-Student-modal-body').innerHTML =
             '<div class="form-group">' +
-            '<input id="unique_id" name="unique_id" type="hidden" class="form-control" value="'+ unique_id +'" readonly> ' +
+            '<label for="unique_id">UniqueID</label> ' +
+            '<input id="unique_id" name="unique_id" type="text" class="form-control" value="'+ unique_id +'" readonly> ' +
             '</div>' +
             '<div class="p-1"><!--extra Spacing--></div>' +
-            '<p>Are you sure you want to delete these Records?</p>' +
-            '<p class="text-warning">' +
-            '<small>This action cannot be undone.</small>' +
-            '</p>'
-    }
 
-    function assignSupervisor(unique_id){
-        var lec_unique_id = <?php echo $encoded_lecturer_unique_id?>;
-        var lec_name = <?php echo $encoded_lecturer_name?>;
+            '<div class="form-group">' +
+            '<label for="name">Name</label> ' +
+            '<input id="name" name="name" type="text" class="form-control" value="'+ name +'" readonly> ' +
+            '</div>' +
+            '<div class="p-1"><!--extra Spacing--></div>' +
 
-        let y = '';
+            '<div class="form-group">' +
+            '<label for="email">Email</label> ' +
+            '<input id="email" name="email" type="email" class="form-control" value="'+ email +'" required> ' +
+            '</div>' +
+            '<div class="p-1"><!--extra Spacing--></div>' +
 
-        for(let i = 0; i < lec_unique_id.length; i++){
-            var z = '<option value="' + lec_unique_id[i] + '">' + lec_name[i] +'</option> +';
-            y = y.concat(z);
+            '<div class="form-group">' +
+            '<label for="programme">Programme</label> ' +
+            '<input id="programme" name="programme" type="text" class="form-control" value="'+ programme +'" required> ' +
+            '</div>' +
+            '<div class="p-1"><!--extra Spacing--></div>' +
+
+            '<div class="form-group">' +
+            '<label for="year">Year</label> ' +
+            '<input id="year" name="year" type="text" class="form-control" value="'+ year +'" required> ' +
+            '</div>' +
+            '<div class="p-1"><!--extra Spacing--></div>' +
+
+            '<div class="form-group">' +
+            '<label for="cgpa">CGPA</label> ' +
+            '<input id="cgpa" name="cgpa" type="text" class="form-control" value="'+ cgpa +'" required> ' +
+            '</div>' +
+            '<div class="p-1"><!--extra Spacing--></div>' +
+
+            '<div class="form-group">' +
+            '<label for="phone_num">Phone Number</label> ' +
+            '<input id="phone_num" name="phone_num" type="text" class="form-control" value="'+ phone_num +'" required> ' +
+            '</div>' +
+            '<div class="p-1"><!--extra Spacing--></div>' +
+
+            '<div class="form-group">' +
+            '<label for="fyp_title">FYP Project Title</label> ' +
+            '<input id="fyp_title" name="fyp_title" type="text" class="form-control" value="'+ fyp_title +'" required> ' +
+            '</div>' +
+            '<div class="p-1"><!--extra Spacing--></div>' +
+
+            '<div class="form-group">' +
+            '<label for="password">Password</label> ' +
+            '<input id="password" name="password" type="password" class="form-control" value="'+ password +'" required> ' +
+            '</div>' +
+            '<div class="p-1"><!--extra Spacing--></div>' ;
+
         }
 
-        return document.getElementById('assignSupervisor-modal-body').innerHTML =
-            '<input id="student_unique_id" name="student_unique_id" type="hidden" value="'+ unique_id +'"> ' +
-            '<div class="form-group">' +
-            '<label for="supervisor_unique_id">Supervisor Name</label> ' +
-            '<select class="form-select form-select-sm" name="supervisor_unique_id" aria-label=".form-select-sm example">' +
-            '<option value="" selected>Default</option>' +
-            y +
-            '</select>' +
-            '</div>' +
-            '<div class="p-1"><!--extra Spacing--></div>' +
+        function getDataForDlt(unique_id){
+            return document.getElementById('delete-Student-modal-body').innerHTML =
+                '<div class="form-group">' +
+                '<input id="unique_id" name="unique_id" type="hidden" class="form-control" value="'+ unique_id +'" readonly> ' +
+                '</div>' +
+                '<div class="p-1"><!--extra Spacing--></div>' +
+                '<p>Are you sure you want to delete these Records?</p>' +
+                '<p class="text-warning">' +
+                '<small>This action cannot be undone.</small>' +
+                '</p>'
+        }
 
-            '<div class="form-group">' +
-            '<label for="second_marker_unique_id">Second Marker\'s Name</label> ' +
-            '<select class="form-select form-select-sm" name="second_marker_unique_id" aria-label=".form-select-sm example">' +
-            '<option value="" selected>Default</option>' +
-            y +
-            '</select>' +
-            '</div>' +
-            '<div class="p-1"><!--extra Spacing--></div>';
-    }
+        function assignSupervisor(unique_id){
+            var lec_unique_id = <?php echo $encoded_lecturer_unique_id?>;
+            var lec_name = <?php echo $encoded_lecturer_name?>;
 
-</script>
+            let y = '';
 
-<script>
-    $(document).ready(function(){
-        // NavBar Active
-        $('a.active').removeClass('active');
-        var url = window.location.pathname;
-        var filename = url.substring(url.lastIndexOf('/')+1);
-        $('a[href$="' + filename + '"]').addClass('active');
-    });
-</script>
+            for(let i = 0; i < lec_unique_id.length; i++){
+                var z = '<option value="' + lec_unique_id[i] + '">' + lec_name[i] +'</option> +';
+                y = y.concat(z);
+            }
+
+            return document.getElementById('assignSupervisor-modal-body').innerHTML =
+                '<input id="student_unique_id" name="student_unique_id" type="hidden" value="'+ unique_id +'"> ' +
+                '<div class="form-group">' +
+                '<label for="supervisor_unique_id">Supervisor Name</label> ' +
+                '<select class="form-select form-select-sm" name="supervisor_unique_id" aria-label=".form-select-sm example">' +
+                '<option value="" selected>Default</option>' +
+                y +
+                '</select>' +
+                '</div>' +
+                '<div class="p-1"><!--extra Spacing--></div>' +
+
+                '<div class="form-group">' +
+                '<label for="second_marker_unique_id">Second Marker\'s Name</label> ' +
+                '<select class="form-select form-select-sm" name="second_marker_unique_id" aria-label=".form-select-sm example">' +
+                '<option value="" selected>Default</option>' +
+                y +
+                '</select>' +
+                '</div>' +
+                '<div class="p-1"><!--extra Spacing--></div>';
+        }
+
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            // NavBar Active
+            $('a.active').removeClass('active');
+            var url = window.location.pathname;
+            var filename = url.substring(url.lastIndexOf('/')+1);
+            $('a[href$="' + filename + '"]').addClass('active');
+        });
+    </script>
 
 </body>
 
