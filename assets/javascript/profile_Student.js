@@ -13,8 +13,12 @@ updateBtn.onclick = ()=>{
       if(xhr.readyState === XMLHttpRequest.DONE){
           if(xhr.status === 200){
               let data = xhr.response;
-              if(data === "success"){
-                location.href="../view/profile_student.php";
+              if(data === "Update Successfully"){
+                  msg_banner.style.display = "block";
+                  msg_banner.textContent = data;
+                  setTimeout(function (){
+                      location.href="../view/profile_student.php";
+                  }, 3000);
               }else{
                   msg_banner.style.display = "block";
                   msg_banner.textContent = data;

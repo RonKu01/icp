@@ -107,18 +107,18 @@ if(!isset($_SESSION['unique_id'])){
                                         echo '<td>'.$row['unique_id'].'</td>';
                                         echo '<td>'.$row['name'].'</td>';
                                         echo '<td>'.$meeting.'</td>';
-                                        echo '<td> <a href="schedule_meeting.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Schedule Meeting">&#xe850;</i></a></td>';
-                                        echo '<td><a href="lec_view_logbook.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Logbook">&#xe850;</i></a></td>';
+                                        echo '<td> <a href="schedule_meeting.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Schedule Meeting">&#xe614;</i></a></td>';
+                                        echo '<td><a href="lec_view_logbook.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Logbook">&#x2709;</i></a></td>';
 
                                         if ($filesName == 'Not Submitted yet'){
                                             echo '<td>Not Submitted yet</td>';
                                         } else {
-                                            echo '<td><a href="../assets/fyp/'.$filesName.'" target="_blank" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="FYP">&#xe850;</i></a></td>';
+                                            echo '<td><a href="../assets/fyp/'.$filesName.'" target="_blank" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="FYP">&#xe24d;</i></a></td>';
                                         }
 
                                         echo '<td>
-                                               <a href="grade.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Grade">&#xe850;</i></a>
-                                               <a href="summary_grade.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Summary Grade">&#xe850;</i></a></td>';
+                                               <a href="grade.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Grade">&#xe2e6;</i></a>
+                                               <a href="summary_grade.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Summary Grade">&#xf075;</i></a></td>';
                                         echo '</tr>';
                                     }
                                 }
@@ -184,11 +184,11 @@ if(!isset($_SESSION['unique_id'])){
                                             if ($filesName == 'Not Submitted yet'){
                                                 echo '<td>Not Submitted yet</td>';
                                             } else {
-                                                echo '<td><a href="../assets/fyp/'.$filesName.'" target="_blank" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="FYP">&#xe850;</i></a></td>';
+                                                echo '<td><a href="../assets/fyp/'.$filesName.'" target="_blank" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="FYP">&#xe24d;</i></a></td>';
                                             }
 
                                             echo '<td>
-                                                      <a href="second_marker_grade.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Review">&#xe850;</i></a>
+                                                      <a href="second_marker_grade.php?student_unique_id='.$unique_id.'" style="color: gray"><i class="material-icons" data-toggle="tooltip" title="Review">&#xf009;</i></a>
                                                   </td>';
                                             echo '</tr>';
                                         }
