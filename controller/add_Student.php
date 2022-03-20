@@ -8,10 +8,9 @@
     $cgpa = mysqli_real_escape_string($conn, $_POST['cgpa']);
     $phone_num = mysqli_real_escape_string($conn, $_POST['phone_num']);
     $fyp_title = mysqli_real_escape_string($conn, $_POST['fyp_title']);
-    $supervisor_unique_id = mysqli_real_escape_string($conn, $_POST['supervisor_unique_id']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-    if(!empty($name) && !empty($email) && !empty($programme) && !empty($year)&& !empty($cgpa) && !empty($phone_num)&& !empty($fyp_title) && !empty($supervisor_unique_id) && !empty($password)){
+    if(!empty($name) && !empty($email) && !empty($programme) && !empty($year)&& !empty($cgpa) && !empty($phone_num)&& !empty($fyp_title) && !empty($password)){
         if(filter_var($email, FILTER_VALIDATE_EMAIL)){
             $sql = mysqli_query($conn, "SELECT * FROM student WHERE email = '{$email}'");
             if(mysqli_num_rows($sql) > 0){
@@ -27,11 +26,8 @@
                 VALUES ('{$login_id}', '{$encrypt_pass}', '{$roles}', '{$ran_id}')");
 
                 if($insert_query){
-                  $insert_query2 = mysqli_query($conn, "INSERT INTO student (unique_id, name, email, programme, year, cgpa, phone_num, fyp_title, supervisor_unique_id)
-                  VALUES ('{$ran_id}', '{$name}', '{$email}', '{$programme}', '{$year}', '{$cgpa}', '{$phone_num}', '{$fyp_title}', '{$supervisor_unique_id}')");
-
-                  $insert_query3 = mysqli_query($conn,"INSERT INTO progress (student_unique_id, lecturer_unique_id, progress_stage, proposal_due, final_due)
-                  VALUES ('{$ran_id}', 0, 'not_set', 'NULL', 'NULL')");
+                  $insert_query2 = mysqli_query($conn, "INSERT INTO student (unique_id, name, email, programme, year, cgpa, phone_num, fyp_title)
+                  VALUES ('{$ran_id}', '{$name}', '{$email}', '{$programme}', '{$year}', '{$cgpa}', '{$phone_num}', '{$fyp_title}')");
 
                   echo "success";
                 }else{

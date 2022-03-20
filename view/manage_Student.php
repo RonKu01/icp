@@ -115,7 +115,6 @@ if(!isset($_SESSION['unique_id'])){
                                             echo '<td>'.$row2['name'].'</td>';
                                         }
 
-
                                         if($row['second_marker_unique_id'] == 0 || $row['second_marker_unique_id'] == NULL){
                                             echo '<td>not_set</td>';
                                         }else{
@@ -129,7 +128,7 @@ if(!isset($_SESSION['unique_id'])){
                                             echo '<td>'.$row3['name'].'</td>';
                                         }
                                         echo '<td>
-                                                <a href="#assignSupervisorModal" class="edit" onclick="return assignSupervisor(`'.$row['unique_id'].'`)" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Assign">&#xE872;</i></a>
+                                                <a href="#assignSupervisorModal" class="edit" onclick="return assignSupervisor(`'.$row['unique_id'].'`)" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Assign">&#xe8f4;</i></a>
                                                  <a href="#editEmployeeModal" onclick="return getDataForEdit(`'.$row['unique_id'].'`,`'.$row['name'].'`,`'.$row['email'].'`,`'.$row['programme'].'`,`'.$row['year'].'`,`'.$row['cgpa'].'`,`'.$row['phone_num'].'`,`'.$row['fyp_title'].'`, `'.$row['password'].'`)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                                  <a href="#deleteEmployeeModal" onclick="return getDataForDlt(`'.$row['unique_id'].'`)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                               </td>';
