@@ -68,7 +68,7 @@ $studentid = $_GET['student_unique_id'];
 
     $(document).ready(function() {
         var calendar = $('#calendar').fullCalendar({
-            displayEventTime: true,
+            displayEventTime: false,
             editable:true,
             header:{
                 left:'prev,next today',

@@ -59,7 +59,7 @@ if(!isset($_SESSION['unique_id'])){
                         mysqli_free_result($result);
 
                         ?>
-                        <h2>Next Meeting: <?php echo $meeting_date;?></h2>
+                        <h2>Next Meeting: <?php echo $meeting_date ?? 'No Meeting Schedule.';?></h2>
 
 
 
