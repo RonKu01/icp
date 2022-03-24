@@ -29,11 +29,90 @@ if(!isset($_SESSION['unique_id'])){
             require_once "nav_admin.php";
         ?>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-5">
-            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active d-flex justify-content-center">
-                        <img src="../assets/images/admin_1.jpg" class="d-block w-75" alt="...">
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="pt-5">
+                <div class="container-xl">
+                    <div class="row align-items-start">
+                        <h1>Lecturer & Student Information</h1>
+                            <div class="col">
+                            <div class="table-responsive-sm">
+                                <div class="table-wrapper">
+                                    <div class="table-title">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <h2>Lecturers <b>List</b></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        $sql = "SELECT * FROM `lecturer` INNER JOIN userlogin ON lecturer.unique_id = userlogin.unique_id";
+
+                                        $result = $conn ->query($sql);
+                                        if (!empty($result) && $result->num_rows > 0) {
+                                            for ($i = 0; $i < mysqli_num_rows($result); $i++){
+                                                $row  = mysqli_fetch_assoc($result);
+
+                                                $unique_id = $row['unique_id'];
+
+                                                echo '<tr>';
+                                                echo '<td>'.$row['name'].'</td>';
+                                                echo '<td>'.$row['email'].'</td>';
+                                                echo '</tr>';
+                                            }
+                                        }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col">
+                            <div class="table-responsive-sm">
+                                <div class="table-wrapper">
+                                    <div class="table-title">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <h2>Student <b>List</b></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        $sql = "SELECT * FROM `student` INNER JOIN userlogin ON student.unique_id = userlogin.unique_id ORDER BY student.id ASC";
+
+                                        $result = $conn ->query($sql);
+                                        if (!empty($result) && $result->num_rows > 0) {
+                                            for ($i = 0; $i < mysqli_num_rows($result); $i++){
+                                                $row  = mysqli_fetch_assoc($result);
+                                                $unique_id = $row['unique_id'];
+                                                echo '<tr>';
+                                                echo '<td>'.$row['name'].'</td>';
+                                                echo '<td>'.$row['email'].'</td>';
+
+                                                echo '</tr>';
+                                            }
+                                        }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

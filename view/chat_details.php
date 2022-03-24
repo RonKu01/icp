@@ -127,7 +127,7 @@ if(mysqli_num_rows($sql) > 0){
                 <div class="card-body">
                     <div class="card-title">
                         <h2><?php echo $row['name'] ?></h2>
-                        <a class="btn btn-outline-primary" href="chat_room.php">back</a>
+                        <a class="btn btn-outline-primary" href="chat_room.php">Back</a>
                     </div>
                 </div>
             </div>

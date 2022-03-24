@@ -54,7 +54,7 @@ if(!isset($_SESSION['unique_id'])){
                 require_once "nav_student.php";
             }
             ?>
-            <main class="col-md-9 ms-sm-auto px-md-4">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="container-xl ">
                     <div class="table-responsive">
                         <div class="table-wrapper">
@@ -118,7 +118,7 @@ if(!isset($_SESSION['unique_id'])){
                         <div class="modal-content">
                             <form class="was-validated" action="#" method="POST" enctype="multipart/form-data" autocomplete="off" novalidate>
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Add Employee</h4>
+                                    <h4 class="modal-title">Add Lecturer</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 </div>
                                 <div class="modal-body">
